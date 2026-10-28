@@ -5,6 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Portfolio</title>
 
+  <!-- Runs before first paint so saved theme and JS-only reveal styles apply without a flash -->
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      var savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light" || savedTheme === "dark") document.documentElement.setAttribute("data-theme", savedTheme);
+    } catch (e) {}
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;600&display=swap" rel="stylesheet">
@@ -48,7 +57,7 @@
   <main id="main">
     <section id="hero" class="hero" aria-labelledby="hero-title">
       <div class="container hero__grid">
-        <div class="hero__copy">
+        <div class="hero__copy" data-reveal>
           <p class="label">Portfolio</p>
           <h1 id="hero-title" class="hero__title">Small, honest experiments with <em class="display-olive">data</em>.</h1>
           <p class="hero__sub">I test ideas properly, write down what actually happened, and show the results, including what did not work.</p>
@@ -58,7 +67,7 @@
           </div>
         </div>
 
-        <figure class="readout">
+        <figure class="readout" data-reveal>
           <div class="readout__head">
             <span class="label readout__label">Featured result</span>
             <span class="readout__live">
@@ -86,7 +95,7 @@
 
     <section id="work" class="work" aria-labelledby="work-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <p class="label section-head__num">01 Work</p>
           <h2 id="work-title">Selected projects</h2>
           <p class="section-head__intro">One experiment so far, documented end to end.</p>
@@ -139,7 +148,7 @@
 
     <section id="writing" class="writing" aria-labelledby="writing-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <p class="label section-head__num">02 Writing</p>
           <h2 id="writing-title">Write-ups</h2>
           <p class="section-head__intro">What I tried, what happened, and what I would do differently.</p>
@@ -161,16 +170,16 @@
 
     <section id="about" class="about" aria-labelledby="about-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <p class="label section-head__num">03 About</p>
           <h2 id="about-title">About me</h2>
           <p class="section-head__intro">Small, careful experiments, explained plainly.</p>
         </div>
 
         <div class="about__grid">
-          <p class="about__text">I'm [FILL: name]. I like turning a question into a small, careful experiment and then explaining the result plainly. I work with Python and data and lead team projects. [FILL: 1 to 2 sentences about what I study or work on and what I am curious about next.]</p>
+          <p class="about__text" data-reveal>I'm [FILL: name]. I like turning a question into a small, careful experiment and then explaining the result plainly. I work with Python and data and lead team projects. [FILL: 1 to 2 sentences about what I study or work on and what I am curious about next.]</p>
 
-          <div class="about__skills">
+          <div class="about__skills" data-reveal>
             <h3 class="label about__skills-title">Skills</h3>
             <ul class="chips" aria-label="Skills">
               <li class="chip">Python</li>
@@ -191,13 +200,13 @@
 
     <section id="contact" class="contact" aria-labelledby="contact-title">
       <div class="container">
-        <div class="section-head">
+        <div class="section-head" data-reveal>
           <p class="label section-head__num">04 Contact</p>
           <h2 id="contact-title">Get in touch</h2>
           <p class="section-head__intro">Want to talk about a project? Reach out.</p>
         </div>
 
-        <ul class="contact-list">
+        <ul class="contact-list" data-reveal>
           <li class="contact-row">
             <span class="label contact-row__label">GitHub</span>
             <a class="contact-row__link" href="https://github.com/Denver-A7" target="_blank" rel="noopener">github.com/Denver-A7 <span aria-hidden="true">&rarr;</span></a>

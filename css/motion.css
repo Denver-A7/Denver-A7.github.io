@@ -8,6 +8,21 @@
   transition: transform .22s ease;
 }
 
+.nav__indicator {
+  transition: transform .3s cubic-bezier(.65, 0, .2, 1), opacity .2s ease;
+}
+
+/* Slab wipe reveal. Only applies when JS is running (html.js); content is
+   always visible otherwise. Negative insets keep shadows/focus rings unclipped. */
+.js [data-reveal] {
+  clip-path: inset(-48px calc(100% + 48px) -64px -48px);
+}
+
+.js [data-reveal].is-revealed {
+  clip-path: inset(-48px -48px -64px -48px);
+  transition: clip-path .6s cubic-bezier(.65, 0, .2, 1) var(--reveal-delay, 0ms);
+}
+
 @keyframes led-blink {
   0%, 44% { opacity: 1; }
   50%, 56% { opacity: .25; }
@@ -20,11 +35,18 @@
 
 @media (prefers-reduced-motion: reduce) {
   .theme-toggle__rocker,
-  .nav__link::after {
+  .nav__link::after,
+  .nav__indicator {
     transition: none;
   }
 
   .led {
     animation: none;
+  }
+
+  .js [data-reveal],
+  .js [data-reveal].is-revealed {
+    clip-path: none;
+    transition: none;
   }
 }

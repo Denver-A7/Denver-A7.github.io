@@ -32,9 +32,33 @@
 }
 
 .nav__links {
+  position: relative;
   display: flex;
   align-items: center;
   gap: var(--space-6);
+}
+
+/* Single sliding underline, positioned by JS; per-link ::after is the no-JS/mobile fallback */
+.nav__indicator {
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  width: 1px;
+  height: 2px;
+  background: var(--steel-olive);
+  transform-origin: left;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nav__indicator.is-visible {
+  opacity: 1;
+}
+
+@media (min-width: 901px) {
+  .nav__links.has-indicator .nav__link::after {
+    display: none;
+  }
 }
 
 .nav__link {
@@ -112,6 +136,10 @@
 @media (max-width: 900px) {
   .nav__menu-btn {
     display: inline-flex;
+  }
+
+  .nav__indicator {
+    display: none;
   }
 
   .nav__links {
@@ -377,6 +405,7 @@
 
 .section-head__num {
   margin-bottom: var(--space-4);
+  font-variant-numeric: tabular-nums;
 }
 
 .section-head h2 {
@@ -608,6 +637,35 @@
   text-decoration: underline;
   text-decoration-color: var(--olive);
   text-decoration-thickness: 2px;
+}
+
+/* ---------- Scroll level gauge (created by JS) ---------- */
+
+.gauge {
+  position: fixed;
+  top: var(--nav-h);
+  right: 0;
+  bottom: 0;
+  z-index: 90;
+  width: 4px;
+  background: rgba(0, 0, 0, .28);
+  pointer-events: none;
+}
+
+.gauge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(to bottom, transparent 0 calc(10% - 1px), rgba(255, 255, 255, .35) calc(10% - 1px) 10%);
+}
+
+.gauge__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--olive);
+  transform: scaleY(0);
+  transform-origin: top;
+  will-change: transform;
 }
 
 /* ---------- Footer ---------- */
