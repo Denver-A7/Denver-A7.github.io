@@ -1,1 +1,92 @@
-/* Design tokens: colors, type, spacing, radii, shadows, motion. */
+/* Design tokens: colors, type, spacing, radii, motion. Dark is the default theme. */
+
+:root {
+  color-scheme: dark;
+
+  /* Surfaces */
+  --wall: #4F4F4D;
+  --steel: #151515;
+  --card: #1B1B1A;
+
+  /* Text */
+  --ink: #F0EEE9;
+  --ink-2: #DAD8D3;
+  --muted: #C9C6C0;
+  --line: rgba(0, 0, 0, .35);
+
+  /* Accent (green text only as large display text or on --steel / --card) */
+  --olive: #587048;
+  --olive-text: #8AA575;
+
+  /* Text placed on steel or olive, constant across themes */
+  --steel-ink: #F0EEE9;
+  --steel-muted: #C9C6C0;
+  --steel-olive: #8AA575;
+  --on-olive: #F0EEE9;
+
+  --selection: rgba(88, 112, 72, .35);
+
+  /* Type */
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --text-body: 17px;
+  --text-label: 11px;
+  --text-h1: clamp(2.4rem, 6vw, 4.6rem);
+  --text-h2: clamp(1.8rem, 3.6vw, 2.6rem);
+  --leading-body: 1.65;
+  --leading-heading: 1.08;
+  --tracking-heading: -0.01em;
+  --tracking-label: 0.24em;
+  --measure: 66ch;
+
+  /* Spacing (multiples of 4) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-14: 56px;
+  --space-16: 64px;
+  --space-18: 72px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-28: 112px;
+
+  /* Layout */
+  --container: 1120px;
+  --gutter: var(--space-6);
+  --section-pad: var(--space-28);
+
+  /* Radii */
+  --radius-btn: 2px;
+  --radius-card: 0;
+
+  /* Focus */
+  --focus-ring: 2px solid var(--olive-text);
+  --focus-offset: 3px;
+}
+
+/* Light theme: applied only by the toggle (data-theme="light"); first visits are always dark */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --wall: #CFCDC8;
+  --steel: #151515;
+  --card: #E6E4DF;
+  --ink: #151515;
+  --ink-2: #2B2B2A;
+  --muted: #4A4A48;
+  --line: rgba(0, 0, 0, .25);
+  --olive: #587048;
+  --olive-text: #3F5A31;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --gutter: var(--space-4);
+    --section-pad: var(--space-18);
+  }
+}
