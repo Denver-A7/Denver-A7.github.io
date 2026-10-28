@@ -514,9 +514,14 @@
 }
 
 .project__media {
-  padding: var(--space-8) var(--space-6);
+  display: flex;
+  align-items: center;
+  padding: var(--space-6);
   border-right: 1px solid var(--line);
-  align-self: start;
+}
+
+.project__media .scan {
+  width: 100%;
 }
 
 .project__media img {
