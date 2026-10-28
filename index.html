@@ -79,13 +79,13 @@
           <div class="chart" role="img" aria-label="Bar chart: Baseline 14, Claude Haiku 20">
             <div class="chart__row">
               <span class="chart__name">Baseline</span>
-              <span class="chart__track"><span class="chart__bar chart__bar--neutral" style="--v: 14;"></span></span>
-              <span class="chart__value">14</span>
+              <span class="chart__track"><span class="chart__bar chart__bar--neutral" style="--v: 14;" data-value="14"></span></span>
+              <span class="chart__value" data-count="14">14</span>
             </div>
             <div class="chart__row">
               <span class="chart__name">Claude Haiku</span>
-              <span class="chart__track"><span class="chart__bar chart__bar--olive" style="--v: 20;"></span></span>
-              <span class="chart__value">20</span>
+              <span class="chart__track"><span class="chart__bar chart__bar--olive" style="--v: 20;" data-value="20"></span></span>
+              <span class="chart__value" data-count="20">20</span>
             </div>
           </div>
           <figcaption class="readout__caption">Customers each model got right where they disagreed (194 test customers). Small gap, p&nbsp;=&nbsp;0.39.</figcaption>
@@ -106,8 +106,10 @@
           <span class="led project__led" aria-hidden="true"></span>
 
           <figure class="project__media">
-            <img src="assets/results_chart.png" width="1870" height="748" loading="lazy"
-                 alt="Two bar charts of the 34 customers where the models disagreed, out of 194 tested. Left: Claude Haiku was right on 20, the trained baseline on 14. Right, by contract type: month-to-month 17 versus 13, one year 3 versus 1, two year 0 versus 0. The gap is small, p equals 0.39.">
+            <span class="scan" data-scan>
+              <img src="assets/results_chart.png" width="1870" height="748" loading="lazy"
+                   alt="Two bar charts of the 34 customers where the models disagreed, out of 194 tested. Left: Claude Haiku was right on 20, the trained baseline on 14. Right, by contract type: month-to-month 17 versus 13, one year 3 versus 1, two year 0 versus 0. The gap is small, p equals 0.39.">
+            </span>
           </figure>
 
           <div class="project__body">
@@ -124,7 +126,7 @@
 
             <ul class="stats" aria-label="Key numbers">
               <li class="stat">194 customers tested</li>
-              <li class="stat">34 disagreements</li>
+              <li class="stat"><span data-count="34">34</span> disagreements</li>
               <li class="stat">Haiku 20 vs baseline 14</li>
               <li class="stat">p = 0.39 (not significant)</li>
             </ul>

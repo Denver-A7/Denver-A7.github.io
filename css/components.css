@@ -365,7 +365,9 @@
 .chart__bar {
   display: block;
   height: 100%;
-  width: calc(var(--v) / 24 * 100%);
+  /* 25-point scale */
+  width: calc(var(--v) / 25 * 100%);
+  transform-origin: left;
 }
 
 .chart__bar--neutral {
@@ -380,6 +382,34 @@
   font-weight: 600;
   font-variant-numeric: tabular-nums;
   text-align: right;
+}
+
+/* Odometer digits (built by data.js around [data-count]) */
+.odo {
+  display: inline-flex;
+  vertical-align: top;
+  font-variant-numeric: tabular-nums;
+  user-select: none;
+}
+
+.odo__digit {
+  display: block;
+  width: 1ch;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.odo__col {
+  display: block;
+  will-change: transform;
+}
+
+.odo__col span {
+  display: block;
+  height: 1em;
+  line-height: 1;
+  text-align: center;
 }
 
 .readout__caption {
@@ -460,6 +490,12 @@
 .project__media img {
   width: 100%;
   border: 1px solid var(--hairline);
+}
+
+.scan {
+  position: relative;
+  display: block;
+  overflow: hidden;
 }
 
 .project__body {

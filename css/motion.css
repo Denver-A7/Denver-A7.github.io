@@ -104,6 +104,51 @@
   animation: led-blink 2.4s infinite;
 }
 
+/* Hero bars grow from 0 once data.js arms them */
+.chart__bar.is-armed {
+  transform: scaleX(0);
+}
+
+.chart__bar.is-grown {
+  transform: scaleX(1);
+  transition: transform .9s cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Scanline wipe for the results chart (JS adds is-scanned when in view) */
+.js .scan > img {
+  clip-path: inset(0 0 100% 0);
+}
+
+.js .scan.is-scanned > img {
+  clip-path: inset(0 0 0 0);
+  transition: clip-path 1.1s linear .3s;
+}
+
+.js .scan::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    transparent calc(100% - 28px),
+    rgba(138, 165, 117, .22) calc(100% - 2px),
+    var(--steel-olive) calc(100% - 2px)
+  );
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+.js .scan.is-scanned::after {
+  animation: scanline 1.1s linear .3s forwards;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); opacity: 1; }
+  92% { opacity: 1; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
 /* Custom cursor */
 .cursor {
   transition: opacity .2s ease;
@@ -143,6 +188,22 @@
 
   .led {
     animation: none;
+  }
+
+  .chart__bar.is-armed,
+  .chart__bar.is-grown {
+    transform: none;
+    transition: none;
+  }
+
+  .js .scan > img,
+  .js .scan.is-scanned > img {
+    clip-path: none;
+    transition: none;
+  }
+
+  .js .scan::after {
+    display: none;
   }
 
   .js [data-reveal],
