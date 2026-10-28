@@ -371,30 +371,20 @@
 
 .section-head {
   margin-bottom: var(--space-12);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
 }
 
-.section-title {
-  display: flex;
-  align-items: center;
-  gap: var(--space-4);
-  font-family: var(--font-sans);
-  font-size: var(--text-label);
-  font-weight: 600;
-  letter-spacing: var(--tracking-label);
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--ink);
+.section-head__num {
+  margin-bottom: var(--space-4);
 }
 
-.section-title__num {
+.section-head h2 {
+  margin-bottom: var(--space-3);
+}
+
+.section-head__intro {
   color: var(--muted);
-}
-
-.section-title::after {
-  content: "";
-  flex: 1;
-  height: 1px;
-  background: var(--line);
 }
 
 /* ---------- Project card ---------- */
@@ -522,5 +512,133 @@
 
   .project__body {
     padding: var(--space-6) var(--space-5);
+  }
+}
+
+/* ---------- Writing ---------- */
+
+.posts {
+  border-top: 1px solid var(--line);
+}
+
+.post {
+  display: grid;
+  grid-template-columns: 9em minmax(0, 1fr) auto;
+  gap: var(--space-6);
+  align-items: baseline;
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--line);
+  max-width: none;
+}
+
+.post__title {
+  font-size: 1.5rem;
+  margin-bottom: var(--space-2);
+}
+
+.post__summary {
+  color: var(--muted);
+}
+
+.post__link {
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  white-space: nowrap;
+  border-bottom: 2px solid var(--olive);
+  padding-bottom: 2px;
+}
+
+/* ---------- About ---------- */
+
+.about__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-12);
+  align-items: start;
+}
+
+.about__text {
+  font-size: 1.1rem;
+}
+
+.about__skills {
+  padding: var(--space-6);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--olive);
+}
+
+.about__skills-title {
+  margin-bottom: var(--space-4);
+}
+
+.about__skills .chips {
+  margin-bottom: 0;
+}
+
+/* ---------- Contact ---------- */
+
+.contact-list {
+  border-top: 1px solid var(--line);
+  max-width: 720px;
+}
+
+.contact-row {
+  display: grid;
+  grid-template-columns: 9em minmax(0, 1fr);
+  gap: var(--space-6);
+  align-items: center;
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--line);
+  max-width: none;
+}
+
+.contact-row__link {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.contact-row__link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--olive);
+  text-decoration-thickness: 2px;
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  background: var(--steel);
+  color: var(--steel-muted);
+  border-top: 1px solid rgba(255, 255, 255, .1);
+  padding: var(--space-8) 0;
+}
+
+.site-footer__text {
+  font-size: 13px;
+  max-width: none;
+}
+
+@media (max-width: 900px) {
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+@media (max-width: 640px) {
+  .post {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .contact-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
   }
 }

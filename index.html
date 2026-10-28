@@ -87,7 +87,9 @@
     <section id="work" class="work" aria-labelledby="work-title">
       <div class="container">
         <div class="section-head">
-          <h2 id="work-title" class="section-title"><span class="section-title__num">01</span> Work</h2>
+          <p class="label section-head__num">01 Work</p>
+          <h2 id="work-title">Selected projects</h2>
+          <p class="section-head__intro">One experiment so far, documented end to end.</p>
         </div>
 
         <!-- Project card: duplicate this <article> for another project -->
@@ -135,17 +137,88 @@
       </div>
     </section>
 
-    <section id="writing" aria-labelledby="writing-title">
+    <section id="writing" class="writing" aria-labelledby="writing-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="label section-head__num">02 Writing</p>
+          <h2 id="writing-title">Write-ups</h2>
+          <p class="section-head__intro">What I tried, what happened, and what I would do differently.</p>
+        </div>
+
+        <ul class="posts">
+          <!-- Writing entry: duplicate this <li> for another post -->
+          <li class="post" data-reveal>
+            <time class="post__date label">[FILL]</time>
+            <div class="post__body">
+              <h3 class="post__title">I asked an AI to do a trained model's job. Here is what it got right and wrong.</h3>
+              <p class="post__summary">A small test on 194 telecom customers, and what I learned from checking the AI's reasons.</p>
+            </div>
+            <a class="post__link" href="#" aria-label="Read: I asked an AI to do a trained model's job">Read <span aria-hidden="true">&rarr;</span></a>
+          </li>
+        </ul>
+      </div>
     </section>
 
-    <section id="about" aria-labelledby="about-title">
+    <section id="about" class="about" aria-labelledby="about-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="label section-head__num">03 About</p>
+          <h2 id="about-title">About me</h2>
+          <p class="section-head__intro">Small, careful experiments, explained plainly.</p>
+        </div>
+
+        <div class="about__grid">
+          <p class="about__text">I'm [FILL: name]. I like turning a question into a small, careful experiment and then explaining the result plainly. I work with Python and data and lead team projects. [FILL: 1 to 2 sentences about what I study or work on and what I am curious about next.]</p>
+
+          <div class="about__skills">
+            <h3 class="label about__skills-title">Skills</h3>
+            <ul class="chips" aria-label="Skills">
+              <li class="chip">Python</li>
+              <li class="chip">pandas</li>
+              <li class="chip">scikit-learn</li>
+              <li class="chip">Jupyter</li>
+              <li class="chip">Git and GitHub</li>
+              <li class="chip">Data cleaning</li>
+              <li class="chip">Model evaluation</li>
+              <li class="chip">Prompting and evaluating an LLM through the Anthropic API</li>
+              <li class="chip">Streamlit</li>
+              <li class="chip">Technical writing</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" aria-labelledby="contact-title">
+    <section id="contact" class="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <div class="section-head">
+          <p class="label section-head__num">04 Contact</p>
+          <h2 id="contact-title">Get in touch</h2>
+          <p class="section-head__intro">Want to talk about a project? Reach out.</p>
+        </div>
+
+        <ul class="contact-list">
+          <li class="contact-row">
+            <span class="label contact-row__label">GitHub</span>
+            <a class="contact-row__link" href="https://github.com/Denver-A7" target="_blank" rel="noopener">github.com/Denver-A7 <span aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li class="contact-row">
+            <span class="label contact-row__label">Email</span>
+            <a class="contact-row__link" href="#">[FILL] <span aria-hidden="true">&rarr;</span></a>
+          </li>
+          <li class="contact-row">
+            <span class="label contact-row__label">LinkedIn</span>
+            <a class="contact-row__link" href="#">[FILL, optional] <span aria-hidden="true">&rarr;</span></a>
+          </li>
+        </ul>
+      </div>
     </section>
   </main>
 
-  <footer id="site-footer">
+  <footer id="site-footer" class="site-footer">
+    <div class="container">
+      <p class="site-footer__text">Built with HTML, CSS and a little JavaScript. &copy; 2026 [FILL: name].</p>
+    </div>
   </footer>
 </body>
 </html>
