@@ -36,7 +36,8 @@
     }
   }
 
-  applyTheme(readSavedTheme() || "dark", false);
+  // Saved choice wins; otherwise dark (a pre-set data-theme="light" on <html> is honoured for previews)
+  applyTheme(readSavedTheme() || (root.getAttribute("data-theme") === "light" ? "light" : "dark"), false);
 
   if (themeBtn) {
     themeBtn.addEventListener("click", function () {

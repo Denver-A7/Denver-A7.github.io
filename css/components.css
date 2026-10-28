@@ -31,6 +31,10 @@
   white-space: nowrap;
 }
 
+.nav__brand:hover {
+  color: var(--steel-olive);
+}
+
 .nav__links {
   position: relative;
   display: flex;
@@ -112,6 +116,16 @@
   border-radius: var(--radius-btn);
 }
 
+.nav__menu-btn:hover,
+.nav__menu-btn[aria-expanded="true"] {
+  border-color: rgba(255, 255, 255, .4);
+  background: rgba(255, 255, 255, .06);
+}
+
+.nav__menu-btn:active {
+  transform: translateY(1px);
+}
+
 .nav__menu-icon {
   position: relative;
   display: block;
@@ -174,6 +188,16 @@
   }
 }
 
+@media (max-width: 640px) {
+  .nav {
+    gap: var(--space-3);
+  }
+
+  .nav__brand {
+    letter-spacing: .24em;
+  }
+}
+
 /* Rocker switch theme toggle */
 
 .theme-toggle {
@@ -193,6 +217,10 @@
   border: 1px solid rgba(255, 255, 255, .18);
   border-radius: 999px;
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, .8);
+}
+
+.theme-toggle:hover .theme-toggle__track {
+  border-color: rgba(255, 255, 255, .4);
 }
 
 .theme-toggle__rocker {
@@ -358,7 +386,7 @@
 
 .chart__track {
   display: block;
-  height: 14px;
+  height: 12px;
   background: rgba(255, 255, 255, .06);
 }
 
@@ -481,21 +509,28 @@
   box-shadow: 0 0 1px #000 inset;
 }
 
+:root[data-theme="light"] .project__led {
+  background: #B9B7B2;
+}
+
 .project__media {
-  padding: var(--space-6);
+  padding: var(--space-8) var(--space-6);
   border-right: 1px solid var(--line);
-  align-self: center;
+  align-self: start;
 }
 
 .project__media img {
   width: 100%;
-  border: 1px solid var(--hairline);
 }
 
+/* Steel frame: the chart has a white background, so give it a mat and a thin edge */
 .scan {
   position: relative;
   display: block;
   overflow: hidden;
+  padding: var(--space-3);
+  background: var(--steel);
+  border: 1px solid rgba(255, 255, 255, .14);
 }
 
 .project__body {
@@ -515,7 +550,7 @@
 }
 
 .chip {
-  padding: 3px var(--space-2);
+  padding: var(--space-1) var(--space-2);
   font-size: 12px;
   line-height: 1.4;
   color: var(--muted);
@@ -772,7 +807,7 @@
 }
 
 .cursor.is-open .cursor__ring-shape {
-  transform: scale(2.6);
+  transform: scale(2);
   border-color: transparent;
   background: currentColor;
 }
@@ -791,7 +826,7 @@
 }
 
 .cursor.is-open.is-down .cursor__ring-shape {
-  transform: scale(2.4);
+  transform: scale(1.85);
 }
 
 .cursor.is-hidden {

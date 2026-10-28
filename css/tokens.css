@@ -28,7 +28,7 @@
   --selection: rgba(88, 112, 72, .35);
 
   /* Concrete texture strength, 0–1 */
-  --tex: 1;
+  --tex: .85;
 
   /* Type */
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;

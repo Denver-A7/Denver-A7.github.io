@@ -16,6 +16,7 @@ html {
 
 body {
   min-height: 100vh;
+  overflow-x: clip;
   background: var(--wall);
   color: var(--ink-2);
   font-family: var(--font-sans);
@@ -182,6 +183,13 @@ main > section {
 :focus-visible {
   outline: var(--focus-ring);
   outline-offset: var(--focus-offset);
+}
+
+/* On steel surfaces the light-theme olive-text is too dark for a ring */
+.site-header :focus-visible,
+.site-footer :focus-visible,
+.readout :focus-visible {
+  outline-color: var(--steel-olive);
 }
 
 :focus:not(:focus-visible) {
