@@ -84,7 +84,55 @@
       </div>
     </section>
 
-    <section id="work" aria-labelledby="work-title">
+    <section id="work" class="work" aria-labelledby="work-title">
+      <div class="container">
+        <div class="section-head">
+          <h2 id="work-title" class="section-title"><span class="section-title__num">01</span> Work</h2>
+        </div>
+
+        <!-- Project card: duplicate this <article> for another project -->
+        <article class="project" data-reveal>
+          <span class="led project__led" aria-hidden="true"></span>
+
+          <figure class="project__media">
+            <img src="assets/results_chart.png" width="1870" height="748" loading="lazy"
+                 alt="Two bar charts of the 34 customers where the models disagreed, out of 194 tested. Left: Claude Haiku was right on 20, the trained baseline on 14. Right, by contract type: month-to-month 17 versus 13, one year 3 versus 1, two year 0 versus 0. The gap is small, p equals 0.39.">
+          </figure>
+
+          <div class="project__body">
+            <h3 class="project__title">Can an AI replace a churn model?</h3>
+
+            <ul class="chips" aria-label="Tools used">
+              <li class="chip">Python</li>
+              <li class="chip">scikit-learn</li>
+              <li class="chip">Anthropic API</li>
+              <li class="chip">Evaluation</li>
+            </ul>
+
+            <p class="project__blurb">I compared a trained logistic-regression model with Claude Haiku (given no training) on telecom customers, then checked whether the AI's written reasons held up.</p>
+
+            <ul class="stats" aria-label="Key numbers">
+              <li class="stat">194 customers tested</li>
+              <li class="stat">34 disagreements</li>
+              <li class="stat">Haiku 20 vs baseline 14</li>
+              <li class="stat">p = 0.39 (not significant)</li>
+            </ul>
+
+            <h4 class="label project__sub">What I learned</h4>
+            <ul class="project__learned">
+              <li>The two models scored about the same but made different mistakes.</li>
+              <li>The AI behaved like a tenure rule: it flagged 91% of new customers as leavers.</li>
+              <li>A right prediction does not mean a sound reason.</li>
+            </ul>
+
+            <div class="project__actions">
+              <a class="btn btn--primary" href="https://github.com/Denver-A7/churn-llm-comparison" target="_blank" rel="noopener">GitHub repo</a>
+              <a class="btn btn--ghost" href="https://churn-llm-vs-model.streamlit.app/" target="_blank" rel="noopener">Live demo</a>
+              <a class="btn btn--ghost" href="#writing">Read the write-up</a>
+            </div>
+          </div>
+        </article>
+      </div>
     </section>
 
     <section id="writing" aria-labelledby="writing-title">

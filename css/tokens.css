@@ -13,6 +13,7 @@
   --ink-2: #DAD8D3;
   --muted: #C9C6C0;
   --line: rgba(0, 0, 0, .35);
+  --hairline: rgba(255, 255, 255, .14);
 
   /* Accent (green text only as large display text or on --steel / --card) */
   --olive: #587048;
@@ -84,6 +85,7 @@
   --ink-2: #2B2B2A;
   --muted: #4A4A48;
   --line: rgba(0, 0, 0, .25);
+  --hairline: rgba(0, 0, 0, .2);
   --olive: #587048;
   --olive-text: #3F5A31;
   --tex: .4;
