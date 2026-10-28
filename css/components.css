@@ -481,7 +481,7 @@
 .project {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   background: var(--card);
   border: 1px solid var(--line);
   border-left: 4px solid var(--olive);
@@ -518,7 +518,7 @@
   display: flex;
   align-items: stretch;
   padding: var(--space-2);
-  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
 }
 
 .project__media .scan {
@@ -546,6 +546,26 @@
 
 .project__body {
   padding: var(--space-8);
+}
+
+/* Wrappers are transparent on mobile so the stacked order is unchanged */
+.project__text,
+.project__details {
+  display: contents;
+}
+
+@media (min-width: 901px) {
+  .project__body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: var(--space-8);
+    align-items: start;
+  }
+
+  .project__text,
+  .project__details {
+    display: block;
+  }
 }
 
 .project__title {
