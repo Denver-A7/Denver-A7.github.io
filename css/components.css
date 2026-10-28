@@ -249,7 +249,8 @@
 .btn--primary {
   background: var(--steel);
   color: var(--steel-ink);
-  border-bottom: 3px solid var(--olive);
+  /* Olive edge as a shadow so pressing it to 0 causes no layout shift */
+  box-shadow: 0 3px 0 var(--olive);
 }
 
 .btn--ghost {
@@ -432,11 +433,22 @@
   margin-top: var(--space-8);
 }
 
+.project.is-linked {
+  cursor: pointer;
+}
+
+.has-cursor .project.is-linked {
+  cursor: none;
+}
+
 .project__led {
   position: absolute;
   top: var(--space-4);
   right: var(--space-4);
   z-index: 1;
+  /* Off until the card is hovered (see motion.css) */
+  background: #3A3A38;
+  box-shadow: 0 0 1px #000 inset;
 }
 
 .project__media {
@@ -577,8 +589,7 @@
   text-decoration: none;
   color: var(--ink);
   white-space: nowrap;
-  border-bottom: 2px solid var(--olive);
-  padding-bottom: 2px;
+  padding-bottom: 3px;
 }
 
 /* ---------- About ---------- */
@@ -631,12 +642,124 @@
   font-size: 1.35rem;
   text-decoration: none;
   color: var(--ink);
+  padding-bottom: 2px;
 }
 
+/* Sliding underline for text links (animated in motion.css) */
+.post__link,
+.contact-row__link {
+  background-image: linear-gradient(var(--olive), var(--olive));
+  background-repeat: no-repeat;
+  background-size: 0% 2px;
+  background-position: 0 100%;
+  border-bottom: 1px solid var(--line);
+}
+
+.post__link:hover,
 .contact-row__link:hover {
-  text-decoration: underline;
-  text-decoration-color: var(--olive);
-  text-decoration-thickness: 2px;
+  background-size: 100% 2px;
+}
+
+/* ---------- Custom cursor (created by cursor.js) ---------- */
+
+.has-cursor,
+.has-cursor a,
+.has-cursor button,
+.has-cursor summary,
+.has-cursor label {
+  cursor: none;
+}
+
+.has-cursor input,
+.has-cursor textarea,
+.has-cursor select,
+.has-cursor [contenteditable="true"] {
+  cursor: auto;
+}
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  color: #fff;
+}
+
+/* JS positions ring and dot via transform; the shape/label scale separately */
+.cursor__ring,
+.cursor__dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.cursor__ring-shape {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+}
+
+.cursor__dot {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.cursor__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .24em;
+  text-indent: .24em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  /* Black under the difference blend shows the backdrop, so it reads dark on the inverted disc */
+  color: #000;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(.6);
+}
+
+.cursor.is-hover .cursor__ring-shape {
+  transform: scale(1.6);
+}
+
+.cursor.is-open .cursor__ring-shape {
+  transform: scale(2.6);
+  border-color: transparent;
+  background: currentColor;
+}
+
+.cursor.is-open .cursor__label {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.cursor.is-down .cursor__ring-shape {
+  transform: scale(.85);
+}
+
+.cursor.is-hover.is-down .cursor__ring-shape {
+  transform: scale(1.4);
+}
+
+.cursor.is-open.is-down .cursor__ring-shape {
+  transform: scale(2.4);
+}
+
+.cursor.is-hidden {
+  opacity: 0;
 }
 
 /* ---------- Scroll level gauge (created by JS) ---------- */
