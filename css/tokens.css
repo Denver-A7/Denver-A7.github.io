@@ -63,6 +63,7 @@
   --container: 1120px;
   --gutter: var(--space-6);
   --section-pad: var(--space-28);
+  --nav-h: 54px;
 
   /* Radii */
   --radius-btn: 2px;

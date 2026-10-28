@@ -1,1 +1,30 @@
 /* Animations, transitions, reduced-motion overrides. */
+
+.theme-toggle__rocker {
+  transition: transform .18s cubic-bezier(.6, 0, .2, 1.4);
+}
+
+.nav__link::after {
+  transition: transform .22s ease;
+}
+
+@keyframes led-blink {
+  0%, 44% { opacity: 1; }
+  50%, 56% { opacity: .25; }
+  62%, 100% { opacity: 1; }
+}
+
+.led {
+  animation: led-blink 2.4s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .theme-toggle__rocker,
+  .nav__link::after {
+    transition: none;
+  }
+
+  .led {
+    animation: none;
+  }
+}

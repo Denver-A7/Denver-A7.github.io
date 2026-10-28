@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@300;400&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
@@ -21,11 +21,67 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header id="site-header">
+  <header id="site-header" class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="nav__brand" href="#hero">D. Asuncion</a>
+
+      <button class="nav__menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav__menu-icon" aria-hidden="true"></span>
+        Menu
+      </button>
+
+      <ul id="nav-links" class="nav__links">
+        <li><a class="nav__link" href="#work">Work</a></li>
+        <li><a class="nav__link" href="#writing">Writing</a></li>
+        <li><a class="nav__link" href="#about">About</a></li>
+        <li><a class="nav__link" href="#contact">Contact</a></li>
+      </ul>
+
+      <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+        <span class="theme-toggle__track" aria-hidden="true">
+          <span class="theme-toggle__rocker"></span>
+        </span>
+      </button>
+    </nav>
   </header>
 
   <main id="main">
-    <section id="hero" aria-labelledby="hero-title">
+    <section id="hero" class="hero" aria-labelledby="hero-title">
+      <div class="container hero__grid">
+        <div class="hero__copy">
+          <p class="label">Portfolio</p>
+          <h1 id="hero-title" class="hero__title">Small, honest experiments with <em class="display-olive">data</em>.</h1>
+          <p class="hero__sub">I test ideas properly, write down what actually happened, and show the results, including what did not work.</p>
+          <div class="hero__actions">
+            <a class="btn btn--primary" href="#work">See my work</a>
+            <a class="btn btn--ghost" href="#writing">Read the write-up</a>
+          </div>
+        </div>
+
+        <figure class="readout">
+          <div class="readout__head">
+            <span class="label readout__label">Featured result</span>
+            <span class="readout__live">
+              <span class="led" aria-hidden="true"></span>
+              <span class="label">Live</span>
+            </span>
+          </div>
+          <p class="readout__title">Can an AI do a trained model's job?</p>
+          <div class="chart" role="img" aria-label="Bar chart: Baseline 14, Claude Haiku 20">
+            <div class="chart__row">
+              <span class="chart__name">Baseline</span>
+              <span class="chart__track"><span class="chart__bar chart__bar--neutral" style="--v: 14;"></span></span>
+              <span class="chart__value">14</span>
+            </div>
+            <div class="chart__row">
+              <span class="chart__name">Claude Haiku</span>
+              <span class="chart__track"><span class="chart__bar chart__bar--olive" style="--v: 20;"></span></span>
+              <span class="chart__value">20</span>
+            </div>
+          </div>
+          <figcaption class="readout__caption">Customers each model got right where they disagreed (194 test customers). Small gap, p&nbsp;=&nbsp;0.39.</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section id="work" aria-labelledby="work-title">
