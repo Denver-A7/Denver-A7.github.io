@@ -10,6 +10,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* Keep focused elements and anchor targets clear of the sticky nav */
+  scroll-padding-top: calc(var(--nav-h) + var(--space-4));
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
@@ -196,6 +198,11 @@ main > section {
   outline: none;
 }
 
+/* #main only takes programmatic focus from the skip link; a ring around the whole page is noise */
+#main:focus {
+  outline: none;
+}
+
 ::selection {
   background: var(--selection);
   color: var(--ink);
@@ -209,12 +216,14 @@ main > section {
   padding: var(--space-2) var(--space-4);
   background: var(--steel);
   color: var(--steel-ink);
+  border: 1px solid rgba(255, 255, 255, .35);
   border-radius: var(--radius-btn);
   transform: translateY(-200%);
 }
 
 .skip-link:focus {
   transform: none;
+  outline-color: var(--steel-olive);
 }
 
 .visually-hidden {

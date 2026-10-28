@@ -32,7 +32,8 @@
   cursor.appendChild(ring);
   cursor.appendChild(dot);
   document.body.appendChild(cursor);
-  root.classList.add("has-cursor");
+
+  var disabled = false;
 
   var target = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
   var ringPos = { x: target.x, y: target.y };
@@ -78,10 +79,15 @@
   document.addEventListener(
     "pointermove",
     function (event) {
+      if (disabled) return;
       if (event.pointerType && event.pointerType !== "mouse" && event.pointerType !== "pen") {
+        // Touch on a hybrid device: give the system cursor back until the mouse moves again
+        root.classList.remove("has-cursor");
         cursor.classList.add("is-hidden");
         return;
       }
+      // The system cursor is only hidden after a real mouse has been seen, never up front
+      root.classList.add("has-cursor");
       target.x = event.clientX;
       target.y = event.clientY;
       if (!seen) {
@@ -94,6 +100,11 @@
     },
     { passive: true }
   );
+
+  // Keyboard navigation: drop the stale ring until the mouse moves again
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Tab") cursor.classList.add("is-hidden");
+  });
 
   document.addEventListener("pointerover", function (event) {
     if (seen) updateState(event.target);
@@ -123,6 +134,7 @@
 
   // Fall back to the system cursor if the pointer type or motion preference changes.
   function disable() {
+    disabled = true;
     root.classList.remove("has-cursor");
     cursor.classList.add("is-hidden");
   }

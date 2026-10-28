@@ -12,10 +12,14 @@ css/
   components.css      Nav, buttons, cards, section styles, footer
   motion.css          Animations, transitions, reduced-motion overrides
 js/
-  data.js             Site content (projects, writing, skills, links)
+  data.js             Hero bar and odometer animation, chart scanline reveal
   cursor.js           Custom cursor ring
-  main.js             Nav, theme toggle, rendering from data.js
-assets/               Images and other static files
+  main.js             Nav, theme toggle, reveals, level gauge, clickable cards
+assets/               Images, favicon.svg, og-image.png (social preview)
+tools/
+  og-image.html       Source for assets/og-image.png (render at 1200x630)
+sitemap.xml           For search engines
+robots.txt            Crawler rules and sitemap location
 ```
 
 ## Running locally

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex">
+  <title>Open Graph image source (1200x630)</title>
+  <!-- Source for assets/og-image.png. Render at exactly 1200x630, e.g.:
+       msedge --headless --window-size=1200,630 --screenshot=assets/og-image.png file:///.../tools/og-image.html -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;1,300&family=Inter:wght@600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <style>
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body { display: grid; place-items: center; }
+    /* Wall at full strength reads better at thumbnail size */
+    body::before { opacity: 1; }
+    .panel {
+      width: 1056px;
+      height: 486px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 56px 64px;
+      background: var(--steel);
+      border-left: 8px solid var(--olive);
+      box-shadow: 0 28px 56px -24px rgba(0, 0, 0, .7);
+    }
+    .brand {
+      font: 600 20px/1 var(--font-sans);
+      letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--steel-ink);
+    }
+    h1 {
+      max-width: 880px;
+      font-size: 96px;
+      line-height: 1.04;
+      color: var(--steel-ink);
+    }
+    h1 em { font-style: italic; color: var(--steel-olive); }
+    .foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font: 600 16px/1 var(--font-sans);
+      letter-spacing: .24em;
+      text-transform: uppercase;
+      color: var(--steel-muted);
+    }
+    .bar { width: 120px; height: 6px; background: var(--olive); }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="brand">D. Asuncion</div>
+    <h1>Small, honest experiments with <em>data</em>.</h1>
+    <div class="foot"><span>Portfolio</span><span class="bar"></span></div>
+  </div>
+</body>
+</html>

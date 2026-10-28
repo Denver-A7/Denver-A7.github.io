@@ -28,7 +28,7 @@
   --selection: rgba(88, 112, 72, .35);
 
   /* Concrete texture strength, 0–1 */
-  --tex: .85;
+  --tex: .7;
 
   /* Type */
   --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
@@ -89,7 +89,7 @@
   --hairline: rgba(0, 0, 0, .2);
   --olive: #587048;
   --olive-text: #3F5A31;
-  --tex: .4;
+  --tex: .25;
 }
 
 @media (max-width: 640px) {

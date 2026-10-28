@@ -25,7 +25,6 @@
     var isLight = theme === "light";
     if (themeBtn) {
       themeBtn.setAttribute("aria-checked", String(isLight));
-      themeBtn.setAttribute("aria-label", isLight ? "Switch to dark mode" : "Switch to light mode");
     }
     if (persist) {
       try {
