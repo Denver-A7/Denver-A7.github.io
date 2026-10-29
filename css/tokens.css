@@ -23,7 +23,6 @@
   --steel-ink: #F0EEE9;
   --steel-muted: #C9C6C0;
   --steel-olive: #8AA575;
-  --on-olive: #F0EEE9;
 
   --selection: rgba(88, 112, 72, .35);
 
@@ -53,13 +52,8 @@
   --space-8: 32px;
   --space-10: 40px;
   --space-12: 48px;
-  --space-14: 56px;
-  --space-16: 64px;
   --space-18: 72px;
-  --space-20: 80px;
   --space-22: 88px;
-  --space-24: 96px;
-  --space-28: 112px;
 
   /* Layout */
   --container: 1120px;

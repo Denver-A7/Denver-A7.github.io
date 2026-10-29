@@ -36,7 +36,7 @@
 
   var queued = false;
   function onScroll() {
-    if (queued) return;
+    if (queued || !watchers.length) return;
     queued = true;
     requestAnimationFrame(function () {
       queued = false;

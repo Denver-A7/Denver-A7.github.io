@@ -170,7 +170,7 @@
     });
   }
 
-  /* ---------- 6. Section number count-up ---------- */
+  /* ---------- 4. Section number count-up ---------- */
 
   var counters = Array.prototype.slice.call(document.querySelectorAll(".section-head__num"));
 
@@ -217,7 +217,7 @@
 
   counters.forEach(prepareCounter);
 
-  /* ---------- 4. Scroll reveals ---------- */
+  /* ---------- 5. Scroll reveals ---------- */
 
   var revealEls = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
 
@@ -266,7 +266,7 @@
   checkReveals();
   window.addEventListener("load", checkReveals);
 
-  /* ---------- 7. Clickable project cards ---------- */
+  /* ---------- 6. Clickable project cards ---------- */
 
   // Card click opens the first action link; the card itself is not focusable,
   // so the real <a> remains the only keyboard/screen-reader entry point.
@@ -284,7 +284,7 @@
     });
   });
 
-  /* ---------- 5. Level gauge ---------- */
+  /* ---------- 7. Level gauge ---------- */
 
   var gaugeFill = null;
 

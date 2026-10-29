@@ -148,7 +148,7 @@
 .nav__menu-icon::after { top: 4px; }
 
 @media (max-width: 900px) {
-  .nav__menu-btn {
+  .js .nav__menu-btn {
     display: inline-flex;
   }
 
@@ -156,7 +156,7 @@
     display: none;
   }
 
-  .nav__links {
+  .js .nav__links {
     display: none;
     position: absolute;
     top: 100%;
@@ -171,20 +171,36 @@
     border-bottom: 1px solid rgba(255, 255, 255, .1);
   }
 
-  .nav.is-open .nav__links {
+  .js .nav.is-open .nav__links {
     display: flex;
   }
 
-  .nav__link {
+  .js .nav__link {
     display: block;
     padding: var(--space-3) var(--gutter);
   }
 
-  .nav__link::after {
+  .js .nav__link::after {
     left: var(--gutter);
     right: auto;
     width: 24px;
     bottom: 8px;
+  }
+
+  /* No JS: the links stay in the bar and wrap, and the bar scrolls away instead of sticking */
+  html:not(.js) .site-header {
+    position: static;
+  }
+
+  html:not(.js) .nav {
+    height: auto;
+    flex-wrap: wrap;
+    padding-block: var(--space-2);
+  }
+
+  html:not(.js) .nav__links {
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
   }
 }
 
@@ -206,6 +222,11 @@
   height: 32px;
   padding: 0 var(--space-1);
   border-radius: 999px;
+}
+
+/* The switch needs JS; hide it rather than leave a dead control */
+html:not(.js) .theme-toggle {
+  display: none;
 }
 
 .theme-toggle__track {
@@ -515,23 +536,12 @@
 }
 
 .project__media {
-  display: flex;
-  align-items: stretch;
   padding: var(--space-2);
   border-bottom: 1px solid var(--line);
 }
 
-.project__media .scan {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
 .project__media img {
-  display: block;
   width: 100%;
-  height: auto;
 }
 
 /* Steel frame: the chart has a white background, so give it a mat and a thin edge */
@@ -643,16 +653,6 @@
 }
 
 @media (max-width: 900px) {
-  .project {
-    grid-template-columns: 1fr;
-  }
-
-  .project__media {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-    padding: var(--space-2);
-  }
-
   .project__body {
     padding: var(--space-6) var(--space-5);
   }
