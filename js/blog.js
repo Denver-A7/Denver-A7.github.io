@@ -182,6 +182,8 @@
     var wideQuery = window.matchMedia("(min-width: 1100px)");
     function syncToc() {
       box.open = wideQuery.matches;
+      // The label is a plain heading on wide screens, so keep it out of the tab order
+      label.tabIndex = wideQuery.matches ? -1 : 0;
     }
     syncToc();
     wideQuery.addEventListener("change", syncToc);
@@ -267,6 +269,7 @@
   }
 
   Array.prototype.forEach.call(article.querySelectorAll("pre"), function (pre) {
+    pre.tabIndex = 0;
     var wrap = document.createElement("div");
     wrap.className = "code-block";
     pre.parentNode.insertBefore(wrap, pre);

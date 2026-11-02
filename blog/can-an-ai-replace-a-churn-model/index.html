@@ -84,7 +84,7 @@
 
       <ul id="nav-links" class="nav__links">
         <li><a class="nav__link" href="../../index.html#work">Work</a></li>
-        <li><a class="nav__link is-active" href="../" aria-current="page">Writing</a></li>
+        <li><a class="nav__link is-active" href="../" aria-current="true">Writing</a></li>
         <li><a class="nav__link" href="../../index.html#about">About</a></li>
         <li><a class="nav__link" href="../../index.html#contact">Contact</a></li>
       </ul>
@@ -98,7 +98,7 @@
   </header>
 
   <main id="main" class="blog-main" tabindex="-1">
-    <div class="container">
+    <div class="container container--article">
       <article class="post">
         <header class="post-head">
           <p class="mono-label">CASE STUDY / <time datetime="2026-11">NOV 2026</time></p>
@@ -133,40 +133,42 @@
         <p>Because AI calls cost money, I tested Haiku on a random sample of 200 test customers. 194 gave answers in the right format, so everything below compares the two models on those same 194 customers. Six answers came back in the wrong format and are left out.</p>
 
         <h2>What happened</h2>
-        <table>
-          <caption>On the same 194 customers (54 of whom actually left):</caption>
-          <thead>
-            <tr>
-              <th scope="col">Model</th>
-              <th scope="col">Accuracy</th>
-              <th scope="col">Precision</th>
-              <th scope="col">Recall</th>
-              <th scope="col">F1</th>
-              <th scope="col">Missed leavers</th>
-              <th scope="col">False alarms</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Baseline</th>
-              <td>0.742</td>
-              <td>0.525</td>
-              <td>0.778</td>
-              <td>0.627</td>
-              <td>12</td>
-              <td>38</td>
-            </tr>
-            <tr>
-              <th scope="row">Claude Haiku</th>
-              <td>0.773</td>
-              <td>0.569</td>
-              <td>0.759</td>
-              <td>0.651</td>
-              <td>13</td>
-              <td>31</td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="table-scroll" role="region" aria-label="Model results" tabindex="0">
+          <table>
+            <caption>On the same 194 customers (54 of whom actually left):</caption>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Accuracy</th>
+                <th scope="col">Precision</th>
+                <th scope="col">Recall</th>
+                <th scope="col">F1</th>
+                <th scope="col">Missed leavers</th>
+                <th scope="col">False alarms</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Baseline</th>
+                <td>0.742</td>
+                <td>0.525</td>
+                <td>0.778</td>
+                <td>0.627</td>
+                <td>12</td>
+                <td>38</td>
+              </tr>
+              <tr>
+                <th scope="row">Claude Haiku</th>
+                <td>0.773</td>
+                <td>0.569</td>
+                <td>0.759</td>
+                <td>0.651</td>
+                <td>13</td>
+                <td>31</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
         <p>Haiku scores a little higher on most measures, but the gap is small. I also gave missed leavers a cost five times larger than false alarms, since losing a customer usually costs more than a wasted discount. On that measure the two are almost tied (0.761 vs 0.766).</p>
 
         <h2>Where they disagree</h2>
