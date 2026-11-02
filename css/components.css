@@ -708,17 +708,22 @@ html:not(.js) .theme-toggle {
 }
 
 .about__skills {
-  padding: var(--space-6);
+  padding: var(--space-4);
   background: var(--card);
   border: 1px solid var(--line);
   border-left: 4px solid var(--olive);
 }
 
 .about__skills-title {
-  margin-bottom: var(--space-4);
+  margin-bottom: var(--space-3);
 }
 
 .about__skills .chips {
+  margin-bottom: 0;
+}
+
+/* No subtitle in About, so drop the heading's bottom margin to keep the heading-to-text gap at the section-head's own 48px */
+.about .section-head h2 {
   margin-bottom: 0;
 }
 
