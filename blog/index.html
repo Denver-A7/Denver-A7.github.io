@@ -62,7 +62,30 @@
 
   <main id="main" class="blog-main" tabindex="-1">
     <div class="container">
-      <h1 class="blog-main__title">Writing</h1>
+      <header class="blog-head">
+        <p class="blog-head__label">WRITING</p>
+        <h1>Notes on what I build and learn</h1>
+        <p class="blog-head__intro">Short write-ups of projects I finish, with what I tried, what happened, and what I would do differently.</p>
+      </header>
+
+      <ul class="post-cards" aria-label="Posts">
+        <!-- Post card: copy this whole <li> for another post (newest first) -->
+        <li>
+          <article class="post-card">
+            <time class="post-card__date" datetime="2026-11">Nov 2026</time>
+            <h2 class="post-card__title"><a class="post-card__link" href="can-an-ai-replace-a-churn-model/index.html">I asked an AI to do a trained model's job. Here is what it got right and wrong</a></h2>
+            <p class="post-card__summary">A small test on 194 telecom customers, and what I learned from checking the AI's reasons.</p>
+            <div class="post-card__foot">
+              <span class="post-card__read">6 min read</span>
+              <ul class="chips" aria-label="Tags">
+                <li class="chip">Churn</li>
+                <li class="chip">LLM</li>
+                <li class="chip">Evaluation</li>
+              </ul>
+            </div>
+          </article>
+        </li>
+      </ul>
     </div>
   </main>
 
