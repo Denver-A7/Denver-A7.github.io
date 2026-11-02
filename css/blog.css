@@ -355,3 +355,191 @@ article.post .post-author .mono-label {
     text-align: left;
   }
 }
+
+/* Reading progress bar (created by blog.js) */
+
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 110;
+  height: 3px;
+  background: var(--olive);
+  transform: scaleX(0);
+  transform-origin: left;
+  pointer-events: none;
+}
+
+/* Adds to the html scroll-padding-top (nav height) so headings clear the sticky nav */
+article.post h2,
+article.post h3 {
+  scroll-margin-top: var(--space-4);
+}
+
+/* Code copy button (created by blog.js) */
+
+article.post .code-block {
+  position: relative;
+  margin-block: 1.5em;
+}
+
+article.post .code-block > pre {
+  margin: 0;
+  padding-top: var(--space-10);
+}
+
+article.post .code-copy {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  min-height: 32px;
+  padding: 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .08em;
+  color: var(--steel-ink);
+  background: color-mix(in srgb, var(--steel-ink) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--steel-ink) 25%, transparent);
+  border-radius: 6px;
+  transition: border-color .15s ease, background-color .15s ease;
+}
+
+article.post .code-copy:hover {
+  border-color: color-mix(in srgb, var(--steel-ink) 55%, transparent);
+}
+
+article.post .code-copy:focus-visible {
+  outline-color: var(--steel-olive);
+}
+
+article.post .code-copy.is-copied {
+  color: var(--steel-olive);
+}
+
+/* Table of contents (created by blog.js): collapsed box on small screens */
+
+.toc {
+  width: 100%;
+  max-width: 680px;
+  margin: 0 auto var(--space-4);
+}
+
+.toc__box {
+  padding: var(--space-3) var(--space-4);
+  background: var(--card);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+.toc__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  list-style: none;
+  cursor: pointer;
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.toc__label::-webkit-details-marker {
+  display: none;
+}
+
+.toc__label::after {
+  content: "+";
+}
+
+.toc__box[open] > .toc__label::after {
+  content: "\2212";
+}
+
+.toc__list {
+  margin-top: var(--space-2);
+}
+
+.toc__list a {
+  display: block;
+  padding: var(--space-1) 0 var(--space-1) var(--space-3);
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--ink-2);
+  text-decoration: none;
+  border-left: 2px solid var(--hairline);
+}
+
+.toc__list a:hover {
+  color: var(--ink);
+}
+
+.toc__list a.is-active {
+  color: var(--ink);
+  border-left-color: var(--olive);
+}
+
+/* Wide screens: sticky list in the left margin. The container widens so the 880px figures
+   can break out of the column without reaching the list. */
+@media (min-width: 1100px) {
+  .blog-main > .container.has-toc {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 680px minmax(0, 1fr);
+    align-items: start;
+    max-width: 1440px;
+  }
+
+  .has-toc > .toc {
+    grid-column: 1;
+    grid-row: 1;
+    position: sticky;
+    top: calc(var(--nav-h) + var(--space-6));
+    width: min(calc(100% - var(--space-4)), 176px);
+    max-height: calc(100vh - var(--nav-h) - var(--space-12));
+    margin: 0;
+    overflow-y: auto;
+  }
+
+  .has-toc > article.post {
+    grid-column: 2;
+    grid-row: 1;
+  }
+
+  .toc__label {
+    cursor: default;
+  }
+
+  .toc__label::after {
+    display: none;
+  }
+}
+
+/* Below 1312px there is no room for figures to break out beside the list */
+@media (min-width: 1100px) and (max-width: 1311px) {
+  .has-toc article.post figure {
+    left: 0;
+    width: 100%;
+    transform: none;
+  }
+}
+
+/* The OPEN label belongs to the portfolio's project cards; never show it on blog pages */
+.cursor__label {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .read-progress {
+    display: none;
+  }
+
+  article.post .code-copy {
+    transition: none;
+  }
+}
