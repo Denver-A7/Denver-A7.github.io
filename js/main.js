@@ -268,10 +268,10 @@
 
   /* ---------- 6. Clickable project cards ---------- */
 
-  // Card click opens the first action link; the card itself is not focusable,
-  // so the real <a> remains the only keyboard/screen-reader entry point.
+  // Card click opens the link marked data-card-link (else the first action link); the card
+  // itself is not focusable, so the real <a> remains the only keyboard/screen-reader entry point.
   Array.prototype.forEach.call(document.querySelectorAll(".project"), function (card) {
-    var primary = card.querySelector(".project__actions a[href]");
+    var primary = card.querySelector("[data-card-link]") || card.querySelector(".project__actions a[href]");
     if (!primary) return;
     card.classList.add("is-linked");
 
@@ -280,7 +280,8 @@
       if (event.target.closest("a, button")) return;
       var selection = window.getSelection();
       if (selection && String(selection).length) return;
-      window.open(primary.href, "_blank", "noopener");
+      if (primary.target === "_blank") window.open(primary.href, "_blank", "noopener");
+      else window.location.href = primary.href;
     });
   });
 
