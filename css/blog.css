@@ -1,24 +1,234 @@
-/* Blog pages: page frame and the reading panel. Tokens only; no new colors. */
+/* Blog pages: page frame and long-form article styles. Existing tokens only. */
 
 .blog-main {
   padding-block: var(--space-18) var(--section-pad);
   min-height: calc(100vh - var(--nav-h));
 }
 
-/* Solid panel (not the textured wall) so long text stays readable in both themes */
-.blog-panel {
+/* Scoped to article.post: the writing list reuses .post on <li> (components.css) */
+article.post {
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --tint-soft: color-mix(in srgb, var(--ink) 5%, transparent);
+  --tint-strong: color-mix(in srgb, var(--ink) 10%, transparent);
+  --tint-accent: color-mix(in srgb, var(--olive) 22%, transparent);
+
+  display: block;
   width: 100%;
   max-width: 680px;
   margin-inline: auto;
-  padding: var(--space-8);
+  padding: var(--space-12);
   background: var(--card);
-  border: 1px solid var(--line);
-  border-left: 4px solid var(--olive);
+  border: 1px solid var(--hairline);
   border-radius: var(--radius-card);
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--ink-2);
+  overflow-wrap: break-word;
+  counter-reset: fig;
+}
+
+article.post > :first-child {
+  margin-top: 0;
+}
+
+article.post > :last-child {
+  margin-bottom: 0;
+}
+
+article.post p,
+article.post li,
+article.post blockquote {
+  max-width: none;
+}
+
+/* Headings */
+
+article.post h1,
+article.post h2,
+article.post h3 {
+  font-family: var(--font-serif);
+  color: var(--ink);
+}
+
+article.post h1 {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin-bottom: var(--space-6);
+}
+
+article.post h2 {
+  font-size: 1.75rem;
+  margin-top: var(--space-12);
+  margin-bottom: var(--space-4);
+}
+
+article.post h3 {
+  font-size: 1.25rem;
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-3);
+}
+
+/* Text */
+
+article.post p {
+  margin-bottom: 1.25em;
+}
+
+article.post ul,
+article.post ol {
+  margin-bottom: 1.25em;
+  padding-left: 1.5em;
+}
+
+article.post ul {
+  list-style: disc;
+}
+
+article.post ol {
+  list-style: decimal;
+}
+
+article.post li + li {
+  margin-top: .4em;
+}
+
+article.post a {
+  color: var(--olive-text);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+article.post a:hover {
+  color: var(--ink);
+}
+
+/* Code */
+
+article.post :not(pre) > code {
+  padding: .1em .35em;
+  font-family: var(--font-mono);
+  font-size: .9em;
+  color: var(--ink);
+  background: var(--tint-accent);
+  border-radius: 4px;
+}
+
+/* Steel block, same as the stat chips, so it reads as a code panel in both themes */
+article.post pre {
+  margin-block: 1.5em;
+  padding: var(--space-4) var(--space-5);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--steel-ink);
+  background: var(--steel);
+  border: 1px solid color-mix(in srgb, var(--steel-ink) 18%, transparent);
+  border-radius: 12px;
+  overflow-x: auto;
+}
+
+article.post pre code {
+  font: inherit;
+  color: inherit;
+}
+
+/* Quotes and callouts */
+
+article.post blockquote {
+  margin-block: 1.5em;
+  padding-left: var(--space-5);
+  border-left: 3px solid var(--olive);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+article.post .callout {
+  margin-block: 1.5em;
+  padding: var(--space-4) var(--space-5);
+  background: var(--tint-soft);
+}
+
+/* Muted (not olive, not orange) so limits read as a caution beside the olive quote edge */
+article.post .callout.limits {
+  border-left: 3px solid var(--muted);
+}
+
+article.post .callout > :last-child {
+  margin-bottom: 0;
+}
+
+/* Tables: display:block makes the table itself the horizontal scroll container */
+article.post table {
+  display: block;
+  max-width: 100%;
+  margin-block: 1.5em;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 16px;
+  line-height: 1.5;
+  font-variant-numeric: tabular-nums;
+}
+
+article.post th,
+article.post td {
+  padding: var(--space-2) var(--space-3);
+  text-align: left;
+  vertical-align: top;
+  border: 1px solid var(--hairline);
+}
+
+article.post th {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: .04em;
+  white-space: nowrap;
+  color: var(--ink);
+  background: var(--tint-strong);
+}
+
+article.post tbody tr:nth-child(even) {
+  background: var(--tint-soft);
+}
+
+/* Figures: wider than the text column, centered on it */
+article.post figure {
+  position: relative;
+  left: 50%;
+  width: min(880px, calc(100vw - 2 * var(--gutter)));
+  margin-block: 2em;
+  transform: translateX(-50%);
+}
+
+article.post figure img {
+  width: 100%;
+  border: 1px solid var(--hairline);
+  border-radius: 16px;
+}
+
+article.post figcaption {
+  max-width: 72ch;
+  margin-top: var(--space-3);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+  counter-increment: fig;
+}
+
+article.post figcaption::before {
+  content: "FIG " counter(fig);
+  margin-right: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .12em;
 }
 
 @media (max-width: 640px) {
-  .blog-panel {
+  article.post {
     padding: var(--space-6) var(--space-5);
   }
 }
