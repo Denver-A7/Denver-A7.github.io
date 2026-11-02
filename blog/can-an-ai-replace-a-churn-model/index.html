@@ -81,11 +81,84 @@
         <aside class="takeaways" aria-labelledby="takeaways-label">
           <h2 id="takeaways-label" class="mono-label">KEY TAKEAWAYS</h2>
           <ul>
-            <li>[FILL: takeaway 1]</li>
-            <li>[FILL: takeaway 2]</li>
-            <li>[FILL: takeaway 3]</li>
+            <li>On 194 telecom customers, a trained model and an untrained AI scored about the same, but made different mistakes.</li>
+            <li>Where they disagreed (34 customers), the AI was right 20 times and the trained model 14. That gap is small and could be chance (p = 0.39).</li>
+            <li>The AI behaved a lot like a simple tenure rule, and some of its written reasons were only partly sound.</li>
           </ul>
         </aside>
+
+        <h2>The question</h2>
+        <p>Companies often want to know which customers are about to leave. That is called churn. The usual way to predict it is to train a model on past customers. I wanted to know something different: could an AI that has never been trained on this data, just by reading a short description of each customer, do the same job?</p>
+
+        <h2>The setup</h2>
+        <p>I used IBM's public Telco Customer Churn sample dataset, which has 7,043 customers and no real people. I split it into a training set of 5,634 customers and a test set of 1,409 customers the model never saw.</p>
+        <p>The baseline is a logistic regression, a standard and easy-to-explain model, adjusted so that it pays extra attention to customers who leave. For the AI, I used Claude Haiku with no examples and no training (this is called zero-shot). I turned each customer into a plain-English summary, for example their contract type, how many months they had been a customer, and which services they had, and asked Haiku to say whether the customer would leave and to give a reason in one sentence.</p>
+        <p>Because AI calls cost money, I tested Haiku on a random sample of 200 test customers. 194 gave answers in the right format, so everything below compares the two models on those same 194 customers. Six answers came back in the wrong format and are left out.</p>
+
+        <h2>What happened</h2>
+        <table>
+          <caption>On the same 194 customers (54 of whom actually left):</caption>
+          <thead>
+            <tr>
+              <th scope="col">Model</th>
+              <th scope="col">Accuracy</th>
+              <th scope="col">Precision</th>
+              <th scope="col">Recall</th>
+              <th scope="col">F1</th>
+              <th scope="col">Missed leavers</th>
+              <th scope="col">False alarms</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Baseline</th>
+              <td>0.742</td>
+              <td>0.525</td>
+              <td>0.778</td>
+              <td>0.627</td>
+              <td>12</td>
+              <td>38</td>
+            </tr>
+            <tr>
+              <th scope="row">Claude Haiku</th>
+              <td>0.773</td>
+              <td>0.569</td>
+              <td>0.759</td>
+              <td>0.651</td>
+              <td>13</td>
+              <td>31</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>Haiku scores a little higher on most measures, but the gap is small. I also gave missed leavers a cost five times larger than false alarms, since losing a customer usually costs more than a wasted discount. On that measure the two are almost tied (0.761 vs 0.766).</p>
+
+        <h2>Where they disagree</h2>
+        <p>The two models gave the same answer for 160 of the 194 customers (82.5 percent). The interesting part is the other 34. In those, Haiku was right 20 times and the baseline 14 times. A simple test on that split gives p = 0.39, which means a gap this size would happen by chance about four times in ten. So I cannot say the AI is better. I can say it is not obviously worse.</p>
+        <p>Almost all of the disagreements, 30 of 34, were customers on month-to-month contracts.</p>
+
+        <figure>
+          <img src="../../assets/blog/results_chart.png" width="1870" height="748" loading="lazy" decoding="async"
+               alt="Bar chart of the 34 customers where the two models disagreed. The baseline was right 14 times and Claude Haiku 20 times. 30 of the 34 were month-to-month customers.">
+          <figcaption>Customers each model got right where they disagreed: baseline 14, Haiku 20. Blue is the baseline, orange is Haiku.</figcaption>
+        </figure>
+
+        <h2>The AI acted like a tenure rule</h2>
+        <p>Tenure is how many months someone has been a customer. Haiku flagged 91 percent of customers with 12 months or less as likely to leave, and only 16 percent of those with more than 12 months. That is close to a rule that says 'new customers leave'. It is a reasonable rule, but it is not the same as understanding each customer.</p>
+
+        <h2>When the reasons were wrong</h2>
+        <p>I do not only care whether an answer was right. I care whether the reason makes sense, because the AI's explanation is text it generated, not a record of how it decided. I read five of the disagreements closely. In four, the answer or the reason was only partly sound, and in one (a customer who left and whom both models missed) the AI's reasoning was good.</p>
+        <p>One pattern stood out. In 7 of Haiku's reasons, it treated having no internet service as a sign of risk. In this data those customers leave rarely (about 7 percent), and 5 of those 7 customers actually stayed. The AI sounded confident and was often wrong for that reason.</p>
+
+        <h2>Limits</h2>
+        <div class="callout limits">
+          <p>This is a small test: 194 customers, one AI model, one prompt, one dataset. A different prompt, a larger sample or a different model could change the picture. The early pilot also failed because my account had no credits, so I kept those logs and noted them in the project instead of hiding them.</p>
+        </div>
+
+        <h2>What I would do next</h2>
+        <p>Test a stronger baseline, check which customer details drive each model's answer, and run more customers if the budget allows.</p>
+
+        <h2>The code</h2>
+        <p>Everything is open: <a href="https://github.com/Denver-A7/churn-llm-comparison">https://github.com/Denver-A7/churn-llm-comparison</a> and an interactive demo: <a href="https://churn-llm-vs-model.streamlit.app/">https://churn-llm-vs-model.streamlit.app/</a></p>
 
         <footer class="post-foot">
           <p><a href="../index.html"><span aria-hidden="true">&larr;</span> Back to all posts</a></p>

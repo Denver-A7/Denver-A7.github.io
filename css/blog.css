@@ -324,6 +324,28 @@ article.post tbody tr:nth-child(even) {
   background: var(--tint-soft);
 }
 
+/* Numbers right-aligned; the model name column stays left */
+article.post td,
+article.post thead th:not(:first-child) {
+  text-align: right;
+}
+
+article.post tbody th {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: normal;
+  background: none;
+}
+
+article.post caption {
+  display: block;
+  margin-bottom: var(--space-2);
+  font-size: 14px;
+  text-align: left;
+  color: var(--muted);
+}
+
 /* Figures: wider than the text column, centered on it */
 article.post figure {
   position: relative;
