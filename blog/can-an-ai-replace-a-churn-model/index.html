@@ -3,13 +3,50 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Can an AI replace a churn model? | D. Asuncion</title>
-  <meta name="description" content="[FILL]">
+  <title>Can an AI replace a churn model? A test on 194 telecom customers | D. Asuncion</title>
+  <meta name="description" content="A trained churn model vs Claude Haiku on 194 telecom customers: where they disagreed the AI was right 20 times to 14, a gap that could be chance (p = 0.39).">
   <link rel="canonical" href="https://denver-a7.github.io/blog/can-an-ai-replace-a-churn-model/">
   <!-- The nav bar is steel (#151515) in both themes, so one value fits both -->
   <meta name="theme-color" content="#151515">
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="alternate" type="application/rss+xml" title="D. Asuncion | Writing" href="../feed.xml">
+
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="D. Asuncion">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://denver-a7.github.io/blog/can-an-ai-replace-a-churn-model/">
+  <meta property="og:title" content="I asked an AI to do a trained model's job. Here is what it got right and wrong">
+  <meta property="og:description" content="A small test on 194 telecom customers, and what I learned from checking the AI's reasons.">
+  <meta property="og:image" content="https://denver-a7.github.io/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A black steel panel on a concrete wall reading: Small, honest experiments with data.">
+  <meta property="article:published_time" content="2026-11-02">
+  <meta property="article:author" content="Denver Asuncion">
+  <meta property="article:tag" content="Churn">
+  <meta property="article:tag" content="LLM">
+  <meta property="article:tag" content="Evaluation">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="I asked an AI to do a trained model's job. Here is what it got right and wrong">
+  <meta name="twitter:description" content="A small test on 194 telecom customers, and what I learned from checking the AI's reasons.">
+  <meta name="twitter:image" content="https://denver-a7.github.io/assets/og-image.png">
+  <meta name="twitter:image:alt" content="A black steel panel on a concrete wall reading: Small, honest experiments with data.">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "I asked an AI to do a trained model's job. Here is what it got right and wrong",
+    "description": "A small test on 194 telecom customers, and what I learned from checking the AI's reasons.",
+    "datePublished": "2026-11-02",
+    "dateModified": "2026-11-02",
+    "author": { "@type": "Person", "name": "Denver Asuncion", "url": "https://denver-a7.github.io/" },
+    "mainEntityOfPage": "https://denver-a7.github.io/blog/can-an-ai-replace-a-churn-model/",
+    "keywords": "Churn, LLM, Evaluation",
+    "inLanguage": "en-US"
+  }
+  </script>
 
   <!-- Runs before first paint so saved theme and JS-only reveal styles apply without a flash -->
   <script>

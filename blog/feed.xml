@@ -1,9 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
   <channel>
     <title>D. Asuncion | Writing</title>
     <link>https://denver-a7.github.io/blog/</link>
+    <atom:link href="https://denver-a7.github.io/blog/feed.xml" rel="self" type="application/rss+xml"/>
     <description>What I tried, what happened, and what I would do differently.</description>
     <language>en-us</language>
+    <lastBuildDate>Mon, 02 Nov 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>I asked an AI to do a trained model's job. Here is what it got right and wrong</title>
+      <link>https://denver-a7.github.io/blog/can-an-ai-replace-a-churn-model/</link>
+      <guid isPermaLink="true">https://denver-a7.github.io/blog/can-an-ai-replace-a-churn-model/</guid>
+      <pubDate>Mon, 02 Nov 2026 00:00:00 GMT</pubDate>
+      <dc:creator>Denver Asuncion</dc:creator>
+      <category>Churn</category>
+      <category>LLM</category>
+      <category>Evaluation</category>
+      <description>A small test on 194 telecom customers, and what I learned from checking the AI's reasons.</description>
+    </item>
   </channel>
 </rss>
