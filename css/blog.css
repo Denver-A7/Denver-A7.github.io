@@ -227,8 +227,131 @@ article.post figcaption::before {
   letter-spacing: .12em;
 }
 
+/* Post template: header, takeaways, footer */
+
+article.post .mono-label {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+article.post .post-head {
+  margin-bottom: var(--space-8);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid var(--hairline);
+}
+
+article.post .post-head .mono-label {
+  margin-bottom: var(--space-4);
+}
+
+article.post .post-head__dek {
+  margin-bottom: var(--space-5);
+  font-family: var(--font-serif);
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+article.post .post-head__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-2) var(--space-4);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+article.post .chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+article.post .chips li {
+  margin: 0;
+}
+
+article.post .takeaways {
+  margin-bottom: var(--space-8);
+  padding: var(--space-6);
+  background: var(--tint-accent);
+  border-radius: 20px;
+}
+
+article.post .takeaways .mono-label {
+  margin-bottom: var(--space-3);
+}
+
+article.post .takeaways ul {
+  margin: 0;
+  padding-left: 1.25em;
+}
+
+article.post .post-foot {
+  display: grid;
+  gap: var(--space-8);
+  margin-top: var(--space-12);
+  padding-top: var(--space-8);
+  border-top: 1px solid var(--hairline);
+}
+
+article.post .post-foot p {
+  margin: 0;
+}
+
+article.post .post-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+article.post a.post-nav__card {
+  display: block;
+  padding: var(--space-4) var(--space-5);
+  line-height: 1.4;
+  color: var(--ink);
+  text-decoration: none;
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+article.post a.post-nav__card:hover {
+  border-color: var(--olive-text);
+}
+
+article.post .post-nav__card--next {
+  text-align: right;
+}
+
+article.post .post-nav__title {
+  display: block;
+  margin-top: var(--space-2);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+}
+
+article.post .post-author .mono-label {
+  margin-bottom: var(--space-2);
+}
+
 @media (max-width: 640px) {
   article.post {
     padding: var(--space-6) var(--space-5);
+  }
+
+  article.post .post-nav {
+    grid-template-columns: 1fr;
+  }
+
+  article.post .post-nav__card--next {
+    text-align: left;
   }
 }
