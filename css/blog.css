@@ -1,0 +1,24 @@
+/* Blog pages: page frame and the reading panel. Tokens only; no new colors. */
+
+.blog-main {
+  padding-block: var(--space-18) var(--section-pad);
+  min-height: calc(100vh - var(--nav-h));
+}
+
+/* Solid panel (not the textured wall) so long text stays readable in both themes */
+.blog-panel {
+  width: 100%;
+  max-width: 680px;
+  margin-inline: auto;
+  padding: var(--space-8);
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--olive);
+  border-radius: var(--radius-card);
+}
+
+@media (max-width: 640px) {
+  .blog-panel {
+    padding: var(--space-6) var(--space-5);
+  }
+}

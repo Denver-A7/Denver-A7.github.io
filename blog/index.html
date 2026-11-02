@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Writing | D. Asuncion</title>
+  <meta name="description" content="Write-ups by D. Asuncion: what I tried, what happened, and what I would do differently.">
+  <link rel="canonical" href="https://denver-a7.github.io/blog/">
+  <!-- The nav bar is steel (#151515) in both themes, so one value fits both -->
+  <meta name="theme-color" content="#151515">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="alternate" type="application/rss+xml" title="D. Asuncion | Writing" href="feed.xml">
+
+  <!-- Runs before first paint so saved theme and JS-only reveal styles apply without a flash -->
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      var savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light" || savedTheme === "dark") document.documentElement.setAttribute("data-theme", savedTheme);
+    } catch (e) {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../css/tokens.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/motion.css">
+  <link rel="stylesheet" href="../css/blog.css">
+
+  <script src="../js/blog.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header id="site-header" class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="nav__brand" href="../">D. Asuncion</a>
+
+      <button class="nav__menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav__menu-icon" aria-hidden="true"></span>
+        Menu
+      </button>
+
+      <ul id="nav-links" class="nav__links">
+        <li><a class="nav__link" href="../#work">Work</a></li>
+        <li><a class="nav__link is-active" href="./" aria-current="page">Writing</a></li>
+        <li><a class="nav__link" href="../#about">About</a></li>
+        <li><a class="nav__link" href="../#contact">Contact</a></li>
+      </ul>
+
+      <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+        <span class="theme-toggle__track" aria-hidden="true">
+          <span class="theme-toggle__rocker"></span>
+        </span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main" class="blog-main" tabindex="-1">
+    <div class="container">
+      <h1 class="blog-main__title">Writing</h1>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer">
+    <div class="container">
+      <p class="site-footer__text">Built with HTML, CSS and a little JavaScript. &copy; 2026 Denver Asuncion.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -89,7 +89,7 @@
 
   var sections = links
     .map(function (link) {
-      return document.querySelector(link.hash);
+      return link.hash ? document.querySelector(link.hash) : null;
     })
     .filter(Boolean);
   var hero = document.getElementById("hero");
