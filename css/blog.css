@@ -519,6 +519,418 @@ article.post .post-author .mono-label {
   }
 }
 
+/* Case-study elements: numbered sections, stat strip, terms, spec card, counts, shows/does-not-show, reproduce box */
+
+article.post .sec-num {
+  margin: var(--space-12) 0 var(--space-1);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .12em;
+  color: var(--olive-text);
+}
+
+/* The number sits above the heading, so the heading drops its own top margin and clears the nav with the number visible */
+article.post .sec-num + h2 {
+  margin-top: 0;
+  scroll-margin-top: var(--space-10);
+}
+
+article.post .lead-in {
+  margin-bottom: 1.5em;
+  font-size: 1.2rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+article.post .stat-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0 0 var(--space-4);
+  padding: 0;
+  list-style: none;
+}
+
+article.post .stat-strip > li {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin: 0;
+  padding: var(--space-4) var(--space-3);
+  background: var(--tint-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+article.post .stat__num {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--olive-text);
+}
+
+article.post .stat__label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .02em;
+  color: var(--muted);
+}
+
+article.post .terms {
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+article.post .terms__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 32px;
+  list-style: none;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+article.post .terms__label::-webkit-details-marker {
+  display: none;
+}
+
+article.post .terms__label::after {
+  content: "+";
+  content: "+" / "";
+}
+
+article.post .terms[open] > .terms__label::after {
+  content: "\2212";
+  content: "\2212" / "";
+}
+
+article.post .terms__list {
+  margin: var(--space-2) 0 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+article.post .terms__list > div {
+  margin-top: var(--space-3);
+}
+
+article.post .terms__list dt {
+  display: inline;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+article.post .terms__list dt::after {
+  content: ":";
+}
+
+article.post .terms__list dd {
+  display: inline;
+  max-width: none;
+  margin: 0;
+}
+
+article.post .spec {
+  margin-block: 1.5em;
+  padding: var(--space-5);
+  background: var(--tint-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+article.post .spec .mono-label {
+  margin-bottom: var(--space-2);
+}
+
+article.post .spec__list {
+  margin: 0;
+}
+
+article.post .spec__row {
+  display: grid;
+  grid-template-columns: 9.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--hairline);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+article.post .spec__row dt {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: .04em;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+article.post .spec__row dd {
+  max-width: none;
+  margin: 0;
+}
+
+/* Row labels are long, so let them wrap inside the table scroller */
+article.post tbody th {
+  min-width: 11em;
+  white-space: normal;
+}
+
+article.post td {
+  font-variant-numeric: tabular-nums;
+}
+
+article.post .counts {
+  margin-block: 1.5em;
+}
+
+article.post .counts__caption {
+  margin-bottom: var(--space-3);
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+article.post .counts__boxes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+article.post .count-box {
+  table-layout: fixed;
+}
+
+article.post .count-box caption {
+  padding-bottom: var(--space-2);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+article.post .count-box tr {
+  background: none;
+}
+
+article.post .count-box td {
+  padding: var(--space-3);
+  text-align: left;
+  vertical-align: middle;
+}
+
+/* Correct predictions sit on the diagonal; error cells stay plain */
+article.post .count-box td.is-correct {
+  background: color-mix(in srgb, var(--olive) 20%, transparent);
+}
+
+article.post .count-box__label,
+article.post .count-box__num {
+  display: block;
+}
+
+article.post .count-box__label {
+  font-size: 13px;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+
+article.post .count-box__num {
+  margin-top: var(--space-1);
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.15;
+  color: var(--ink);
+}
+
+article.post blockquote.pull-quote {
+  margin-block: 2em;
+  padding-left: var(--space-6);
+  font-size: clamp(1.6rem, 4.5vw, 2.1rem);
+  line-height: 1.3;
+}
+
+article.post .pull-quote p {
+  margin: 0;
+}
+
+article.post .shows {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-block: 1.5em;
+  background: var(--tint-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+article.post .shows__col {
+  padding: var(--space-5);
+}
+
+article.post .shows__col + .shows__col {
+  border-left: 1px solid var(--hairline);
+}
+
+article.post .shows h3 {
+  margin: 0 0 var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+article.post .shows ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 16px;
+  line-height: 1.55;
+}
+
+article.post .shows li {
+  position: relative;
+  margin: 0;
+  padding-left: 1.6em;
+}
+
+article.post .shows li + li {
+  margin-top: var(--space-3);
+}
+
+article.post .shows li::before {
+  content: "";
+  position: absolute;
+}
+
+/* Check mark drawn with borders so it does not depend on font glyph coverage */
+article.post .shows__col--yes li::before {
+  left: .3em;
+  top: .25em;
+  width: .35em;
+  height: .7em;
+  border: solid var(--olive-text);
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+article.post .shows__col--no li::before {
+  left: .1em;
+  top: .8em;
+  width: .7em;
+  height: 2px;
+  background: var(--muted);
+}
+
+article.post .repro {
+  margin-block: 1.5em;
+  padding: var(--space-6);
+  background: var(--tint-soft);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+
+article.post .repro h3 {
+  margin: 0 0 var(--space-3);
+  font-size: 1.4rem;
+}
+
+article.post .repro > p {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+article.post .repro__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+}
+
+article.post .repro__action {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-2);
+}
+
+article.post .repro__note {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--muted);
+}
+
+/* The article link style (olive, underlined) must not leak into the buttons */
+article.post a.btn--primary,
+article.post a.btn--primary:hover {
+  color: var(--steel-ink);
+  text-decoration: none;
+}
+
+@media (max-width: 720px) {
+  article.post .stat-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  article.post .stat__num {
+    font-size: clamp(1.3rem, 5.5vw, 1.6rem);
+  }
+}
+
+@media (max-width: 640px) {
+  article.post .counts__boxes,
+  article.post .shows {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  article.post .shows__col + .shows__col {
+    border-left: 0;
+    border-top: 1px solid var(--hairline);
+  }
+
+  article.post .repro {
+    padding: var(--space-5) var(--space-4);
+  }
+}
+
+@media (max-width: 480px) {
+  article.post .spec {
+    padding: var(--space-4);
+  }
+
+  article.post .spec__row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-1);
+  }
+
+  article.post .repro__action,
+  article.post .repro__actions {
+    width: 100%;
+  }
+
+  article.post .repro__action {
+    align-items: stretch;
+  }
+
+  article.post .repro .btn {
+    white-space: normal;
+    text-align: center;
+  }
+}
+
 /* Reading progress bar (created by blog.js) */
 
 .read-progress {

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Can an AI replace a churn model? A test on 194 telecom customers | D. Asuncion</title>
-  <meta name="description" content="A trained churn model vs Claude Haiku on 194 telecom customers: where they disagreed the AI was right 20 times to 14, a gap that could be chance (p = 0.39).">
+  <meta name="description" content="A zero-shot LLM and a trained logistic regression scored about the same on 194 telecom customers. The more informative result was where they disagreed, and whether the LLM's reasons held up.">
   <link rel="canonical" href="https://denver-a7.github.io/blog/can-an-ai-replace-a-churn-model/">
   <!-- The nav bar is steel (#151515) in both themes, so one value fits both -->
   <meta name="theme-color" content="#151515">
@@ -16,7 +16,7 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:url" content="https://denver-a7.github.io/blog/can-an-ai-replace-a-churn-model/">
   <meta property="og:title" content="I asked an AI to do a trained model's job. Here is what it got right and wrong">
-  <meta property="og:description" content="A small test on 194 telecom customers, and what I learned from checking the AI's reasons.">
+  <meta property="og:description" content="A zero-shot LLM and a trained logistic regression scored about the same on 194 telecom customers. The more informative result was where they disagreed, and whether the LLM's reasons held up.">
   <meta property="og:image" content="https://denver-a7.github.io/assets/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
@@ -29,7 +29,7 @@
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="I asked an AI to do a trained model's job. Here is what it got right and wrong">
-  <meta name="twitter:description" content="A small test on 194 telecom customers, and what I learned from checking the AI's reasons.">
+  <meta name="twitter:description" content="A zero-shot LLM and a trained logistic regression scored about the same on 194 telecom customers. The more informative result was where they disagreed, and whether the LLM's reasons held up.">
   <meta name="twitter:image" content="https://denver-a7.github.io/assets/og-image.png">
   <meta name="twitter:image:alt" content="A black steel panel on a concrete wall reading: Small, honest experiments with data.">
 
@@ -38,7 +38,7 @@
     "@context": "https://schema.org",
     "@type": "Article",
     "headline": "I asked an AI to do a trained model's job. Here is what it got right and wrong",
-    "description": "A small test on 194 telecom customers, and what I learned from checking the AI's reasons.",
+    "description": "A zero-shot LLM and a trained logistic regression scored about the same on 194 telecom customers. The more informative result was where they disagreed, and whether the LLM's reasons held up.",
     "datePublished": "2026-11-02",
     "dateModified": "2026-11-02",
     "author": { "@type": "Person", "name": "Denver Asuncion", "url": "https://denver-a7.github.io/" },
@@ -103,9 +103,9 @@
         <header class="post-head">
           <p class="mono-label">CASE STUDY / <time datetime="2026-11">NOV 2026</time></p>
           <h1>I asked an AI to do a trained model's job. Here is what it got right and wrong</h1>
-          <p class="post-head__dek">A small test on 194 telecom customers, and what I learned from checking the AI's reasons.</p>
+          <p class="post-head__dek">A zero-shot LLM and a trained logistic regression scored about the same on 194 telecom customers. The more informative result was where they disagreed, and whether the LLM's reasons held up.</p>
           <div class="post-head__meta">
-            <span>6 min read</span>
+            <span>7 min read</span>
             <span>Updated <time datetime="2026-11">Nov 2026</time></span>
             <ul class="chips" aria-label="Tags">
               <li class="chip">Churn</li>
@@ -118,21 +118,76 @@
         <aside class="takeaways" aria-labelledby="takeaways-label">
           <h2 id="takeaways-label" class="mono-label">KEY TAKEAWAYS</h2>
           <ul>
-            <li>On 194 telecom customers, a trained model and an untrained AI scored about the same, but made different mistakes.</li>
-            <li>Where they disagreed (34 customers), the AI was right 20 times and the trained model 14. That gap is small and could be chance (p = 0.39).</li>
-            <li>The AI behaved a lot like a simple tenure rule, and some of its written reasons were only partly sound.</li>
+            <li>On 194 held-out telecom customers, a trained logistic regression and a zero-shot LLM reached similar accuracy (0.742 and 0.773) but made different errors.</li>
+            <li>On the 34 customers where they disagreed, the LLM was correct 20 times and the baseline 14. A sign test gives p = 0.39, so the difference is consistent with chance.</li>
+            <li>The LLM's predictions tracked tenure closely, and some of its written reasons were only partly sound.</li>
           </ul>
         </aside>
 
-        <h2>The question</h2>
-        <p>Companies often want to know which customers are about to leave. That is called churn. The usual way to predict it is to train a model on past customers. I wanted to know something different: could an AI that has never been trained on this data, just by reading a short description of each customer, do the same job?</p>
+        <ul class="stat-strip" aria-label="At a glance">
+          <li class="stat">
+            <span class="stat__num">194</span>
+            <span class="stat__label">customers evaluated</span>
+          </li>
+          <li class="stat">
+            <span class="stat__num">34</span>
+            <span class="stat__label">predictions that differed</span>
+          </li>
+          <li class="stat">
+            <span class="stat__num">20 vs 14</span>
+            <span class="stat__label">correct, LLM vs baseline</span>
+          </li>
+          <li class="stat">
+            <span class="stat__num">p = 0.39</span>
+            <span class="stat__label">sign test</span>
+          </li>
+        </ul>
 
-        <h2>The setup</h2>
-        <p>I used IBM's public Telco Customer Churn sample dataset, which has 7,043 customers and no real people. I split it into a training set of 5,634 customers and a test set of 1,409 customers the model never saw.</p>
-        <p>The baseline is a logistic regression, a standard and easy-to-explain model, adjusted so that it pays extra attention to customers who leave. For the AI, I used Claude Haiku with no examples and no training (this is called zero-shot). I turned each customer into a plain-English summary, for example their contract type, how many months they had been a customer, and which services they had, and asked Haiku to say whether the customer would leave and to give a reason in one sentence.</p>
-        <p>Because AI calls cost money, I tested Haiku on a random sample of 200 test customers. 194 gave answers in the right format, so everything below compares the two models on those same 194 customers. Six answers came back in the wrong format and are left out.</p>
+        <details class="terms">
+          <summary class="terms__label">Terms used in this post</summary>
+          <dl class="terms__list">
+            <div><dt>Churn</dt> <dd>a customer ending their service.</dd></div>
+            <div><dt>Zero-shot</dt> <dd>the model receives the task description but no worked examples.</dd></div>
+            <div><dt>Logistic regression</dt> <dd>a standard classification model that estimates the probability of an outcome.</dd></div>
+            <div><dt>Precision</dt> <dd>of the customers flagged as leaving, the share who actually left.</dd></div>
+            <div><dt>Recall</dt> <dd>of the customers who actually left, the share that were flagged.</dd></div>
+            <div><dt>F1</dt> <dd>the harmonic mean of precision and recall.</dd></div>
+            <div><dt>Missed leaver (false negative)</dt> <dd>a customer who left but was predicted to stay.</dd></div>
+            <div><dt>False alarm (false positive)</dt> <dd>a customer who stayed but was predicted to leave.</dd></div>
+            <div><dt>Tenure</dt> <dd>the number of months a customer has been with the company.</dd></div>
+            <div><dt>Sign test</dt> <dd>a paired test that compares two classifiers using only the cases where they disagree, counting which model was right each time.</dd></div>
+          </dl>
+        </details>
 
-        <h2>What happened</h2>
+        <p class="sec-num" aria-hidden="true">01</p>
+        <h2>The question: can a prompt replace a trained model?</h2>
+        <p class="lead-in">Churn prediction is usually a supervised learning problem. This post tests whether a prompt can do the same job.</p>
+        <p>Customer churn, the loss of a customer to cancellation, is a standard prediction problem. The usual approach is supervised learning: fit a model on historical customers whose outcomes are known, then score new customers with it. I wanted to test a different approach. Could a large language model (LLM) that has never seen this dataset predict churn from a short written description of each customer?</p>
+        <p>The comparison has a practical side. A trained model requires labeled data, feature preparation and maintenance. A prompt requires none of those. If the prompt performs about as well, the cost of getting started drops. If it does not, the way it fails shows what training provides.</p>
+
+        <p class="sec-num" aria-hidden="true">02</p>
+        <h2>Method: a logistic regression baseline against a zero-shot LLM</h2>
+        <p class="lead-in">Both models were scored on the same held-out customers.</p>
+
+        <div class="spec" role="group" aria-labelledby="spec-label">
+          <p id="spec-label" class="mono-label">Method at a glance</p>
+          <dl class="spec__list">
+            <div class="spec__row"><dt>Data</dt> <dd>IBM Telco Customer Churn sample dataset, 7,043 customers, no real people</dd></div>
+            <div class="spec__row"><dt>Split</dt> <dd>5,634 training customers and 1,409 test customers</dd></div>
+            <div class="spec__row"><dt>Baseline</dt> <dd>logistic regression, adjusted to weight customers who leave more heavily</dd></div>
+            <div class="spec__row"><dt>LLM</dt> <dd>Claude Haiku, zero-shot (no examples, no training on this data)</dd></div>
+            <div class="spec__row"><dt>Model input</dt> <dd>a plain-English summary of each customer: contract type, tenure in months, monthly charge, online security and tech support, and payment method</dd></div>
+            <div class="spec__row"><dt>Model output</dt> <dd>a prediction (leave or stay) and a one-sentence reason</dd></div>
+            <div class="spec__row"><dt>LLM evaluation sample</dt> <dd>200 random test customers, 194 valid responses, 6 excluded for wrong format</dd></div>
+          </dl>
+        </div>
+
+        <p>The baseline is a logistic regression, a standard and easily explained classifier, adjusted to weight customers who leave more heavily. For the LLM, I used Claude Haiku with no examples and no training on this data, an approach called zero-shot prompting. Each customer was converted into a plain-English summary covering contract type, tenure in months, monthly charge, online security and tech support, and payment method. The model was asked to predict whether the customer would leave and to give a one-sentence reason.</p>
+        <p>API calls cost money, so I evaluated the LLM on a random sample of 200 test customers rather than all 1,409. Of those 200, 194 responses followed the required format. Six did not and are excluded, so every comparison below uses the same 194 customers, 54 of whom actually left.</p>
+
+        <p class="sec-num" aria-hidden="true">03</p>
+        <h2>Results: similar scores, different errors</h2>
+        <p class="lead-in">Aggregate metrics were close. The counts behind them were not identical.</p>
         <div class="table-scroll" role="region" aria-label="Model results" tabindex="0">
           <table>
             <caption>On the same 194 customers (54 of whom actually left):</caption>
@@ -149,7 +204,7 @@
             </thead>
             <tbody>
               <tr>
-                <th scope="row">Baseline</th>
+                <th scope="row">Logistic regression (trained baseline)</th>
                 <td>0.742</td>
                 <td>0.525</td>
                 <td>0.778</td>
@@ -158,7 +213,7 @@
                 <td>38</td>
               </tr>
               <tr>
-                <th scope="row">Claude Haiku</th>
+                <th scope="row">Claude Haiku (AI, no training)</th>
                 <td>0.773</td>
                 <td>0.569</td>
                 <td>0.759</td>
@@ -169,35 +224,120 @@
             </tbody>
           </table>
         </div>
-        <p>Haiku scores a little higher on most measures, but the gap is small. I also gave missed leavers a cost five times larger than false alarms, since losing a customer usually costs more than a wasted discount. On that measure the two are almost tied (0.761 vs 0.766).</p>
+        <p>The LLM scores slightly higher on accuracy, precision and F1, and slightly lower on recall. The differences are small for a sample of this size. The baseline produced more false alarms (38 against 31) and missed one fewer leaver (12 against 13).</p>
 
-        <h2>Where they disagree</h2>
-        <p>The two models gave the same answer for 160 of the 194 customers (82.5 percent). The interesting part is the other 34. In those, Haiku was right 20 times and the baseline 14 times. A simple test on that split gives p = 0.39, which means a gap this size would happen by chance about four times in ten. So I cannot say the AI is better. I can say it is not obviously worse.</p>
-        <p>Almost all of the disagreements, 30 of 34, were customers on month-to-month contracts.</p>
+        <div class="counts" role="group" aria-labelledby="counts-caption">
+          <p id="counts-caption" class="counts__caption">Counts behind the table. Each box covers the same 194 customers: 54 who left and 140 who stayed.</p>
+          <div class="counts__boxes">
+            <table class="count-box">
+              <caption>Logistic regression</caption>
+              <tbody>
+                <tr>
+                  <td class="is-correct"><span class="count-box__label">correctly flagged leavers</span> <span class="count-box__num">42</span></td>
+                  <td><span class="count-box__label">missed leavers</span> <span class="count-box__num">12</span></td>
+                </tr>
+                <tr>
+                  <td><span class="count-box__label">false alarms</span> <span class="count-box__num">38</span></td>
+                  <td class="is-correct"><span class="count-box__label">correctly cleared</span> <span class="count-box__num">102</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="count-box">
+              <caption>Claude Haiku</caption>
+              <tbody>
+                <tr>
+                  <td class="is-correct"><span class="count-box__label">correctly flagged leavers</span> <span class="count-box__num">41</span></td>
+                  <td><span class="count-box__label">missed leavers</span> <span class="count-box__num">13</span></td>
+                </tr>
+                <tr>
+                  <td><span class="count-box__label">false alarms</span> <span class="count-box__num">31</span></td>
+                  <td class="is-correct"><span class="count-box__label">correctly cleared</span> <span class="count-box__num">109</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <p>I also compared the models with a cost-weighted measure in which a missed leaver counts five times as much as a false alarm, since losing a customer usually costs more than a wasted discount. On that measure the two are almost tied (0.761 vs 0.766).</p>
+
+        <p class="sec-num" aria-hidden="true">04</p>
+        <h2>Where the models disagree</h2>
+        <p class="lead-in">The two models matched on most customers. The 34 disagreements are the informative cases.</p>
+        <p>The two models gave the same prediction for 160 of the 194 customers (82.5 percent). The informative part is the other 34. In those, the LLM was correct 20 times and the baseline 14 times.</p>
+        <p>To check whether that split could be chance, I used a sign test, which compares the two models using only the cases where they disagree and counts which one was right each time. It gives p = 0.39. A difference this size would appear by chance about four times in ten, so the data do not support a claim that the LLM is better. They do not support a claim that it is worse either.</p>
+
+        <blockquote class="pull-quote"><p>I cannot say the AI is better. I can say it is not obviously worse.</p></blockquote>
+
+        <p>Thirty of the 34 disagreements were customers on month-to-month contracts.</p>
 
         <figure>
           <img src="../../assets/blog/results_chart.png" width="1870" height="748" loading="lazy" decoding="async"
-               alt="Bar chart of the 34 customers where the two models disagreed. The baseline was right 14 times and Claude Haiku 20 times. 30 of the 34 were month-to-month customers.">
-          <figcaption>Customers each model got right where they disagreed: baseline 14, Haiku 20. Blue is the baseline, orange is Haiku.</figcaption>
+               alt="Two bar charts. Left: on the 34 disagreements, the logistic regression baseline was right 14 times and Claude Haiku 20 times. Right: the same counts by contract type; 30 of the 34 disagreements were month-to-month customers (baseline 13, Haiku 17), 4 were one-year (baseline 1, Haiku 3) and none were two-year">
+          <figcaption>Customers each model got right where they disagreed: baseline 14, Haiku 20 (left), and the same split by contract type (right). Blue is the baseline, orange is Haiku.</figcaption>
         </figure>
 
-        <h2>The AI acted like a tenure rule</h2>
-        <p>Tenure is how many months someone has been a customer. Haiku flagged 91 percent of customers with 12 months or less as likely to leave, and only 16 percent of those with more than 12 months. That is close to a rule that says 'new customers leave'. It is a reasonable rule, but it is not the same as understanding each customer.</p>
+        <p class="sec-num" aria-hidden="true">05</p>
+        <h2>The LLM behaved like a tenure heuristic</h2>
+        <p class="lead-in">Its predictions followed one feature more closely than any individual customer.</p>
+        <p>Tenure is the number of months a customer has been with the company. The LLM flagged 91 percent of customers with 12 months or less as likely to leave, and 16 percent of customers with more than 12 months. That pattern resembles a one-feature rule: new customers leave. It is a reasonable heuristic, but a one-feature rule is not the same as reasoning about each customer.</p>
 
-        <h2>When the reasons were wrong</h2>
-        <p>I do not only care whether an answer was right. I care whether the reason makes sense, because the AI's explanation is text it generated, not a record of how it decided. I read five of the disagreements closely. In four, the answer or the reason was only partly sound, and in one (a customer who left and whom both models missed) the AI's reasoning was good.</p>
-        <p>One pattern stood out. In 7 of Haiku's reasons, it treated having no internet service as a sign of risk. In this data those customers leave rarely (about 7 percent), and 5 of those 7 customers actually stayed. The AI sounded confident and was often wrong for that reason.</p>
+        <p class="sec-num" aria-hidden="true">06</p>
+        <h2>Correct predictions with unreliable reasons</h2>
+        <p class="lead-in">Accuracy scores the prediction. It does not score the explanation.</p>
+        <p>Accuracy measures the prediction, not the explanation. The reason the LLM gave is text generated alongside the answer, not a record of how the prediction was produced, so it needs to be checked separately.</p>
+        <p>I read five of the LLM's written reasons against the customers' actual records, choosing cases where the two models were right or wrong in different combinations. In all five, the facts the LLM quoted were true. The logic held up in one. In the other four, the reason was only partly sound: two treated no internet service as a churn risk, and two let long tenure outweigh several risk factors (fiber optic, electronic-check payment, high monthly charges). One prediction was right for a flawed reason, so a correct prediction does not mean a sound explanation. Five hand-picked examples show patterns but do not represent all 194 customers.</p>
+        <p>One pattern recurred. In 7 of the LLM's reasons, it treated having no internet service as a sign of risk. In this data those customers leave rarely (about 7 percent), and 5 of those 7 customers actually stayed. The reasons were stated with confidence, and in those cases the stated risk factor pointed the wrong way.</p>
 
-        <h2>Limits</h2>
-        <div class="callout limits">
-          <p>This is a small test: 194 customers, one AI model, one prompt, one dataset. A different prompt, a larger sample or a different model could change the picture. The early pilot also failed because my account had no credits, so I kept those logs and noted them in the project instead of hiding them.</p>
+        <p class="sec-num" aria-hidden="true">07</p>
+        <h2>What the results do and do not show</h2>
+        <p class="lead-in">The sample is small, so the claims need to stay small too.</p>
+
+        <div class="shows">
+          <div class="shows__col shows__col--yes">
+            <h3>The results show</h3>
+            <ul>
+              <li>On this sample, the LLM and the baseline performed about the same in aggregate.</li>
+              <li>Their errors differ, and most of the differences involve month-to-month customers.</li>
+              <li>The LLM's predictions followed tenure closely.</li>
+              <li>A correct prediction does not guarantee a sound reason.</li>
+            </ul>
+          </div>
+          <div class="shows__col shows__col--no">
+            <h3>The results do not show</h3>
+            <ul>
+              <li>That the LLM is better or worse than the baseline.</li>
+              <li>That the result holds for another prompt, model, sample size or dataset.</li>
+              <li>That the LLM's written reasons describe how it actually reached its prediction.</li>
+            </ul>
+          </div>
         </div>
 
-        <h2>What I would do next</h2>
-        <p>Test a stronger baseline, check which customer details drive each model's answer, and run more customers if the budget allows.</p>
+        <div class="callout limits">
+          <p>This is a small test: 194 customers, one AI model, one prompt, one dataset. A different prompt, a larger sample or a different model could change the result. An early pilot also failed because my API account had no credits. I kept those logs and documented them in the project instead of removing them.</p>
+        </div>
 
-        <h2>The code</h2>
-        <p>Everything is open: <a href="https://github.com/Denver-A7/churn-llm-comparison">https://github.com/Denver-A7/churn-llm-comparison</a> and an interactive demo: <a href="https://churn-llm-vs-model.streamlit.app/">https://churn-llm-vs-model.streamlit.app/</a></p>
+        <p class="sec-num" aria-hidden="true">08</p>
+        <h2>Next steps</h2>
+        <p class="lead-in">Three changes would make the comparison stronger.</p>
+        <p>A stronger baseline, an analysis of which customer details drive each model's predictions, and more customers if the budget allows.</p>
+
+        <p class="sec-num" aria-hidden="true">09</p>
+        <h2>Code and demo</h2>
+        <p class="lead-in">The repository and the demo are public.</p>
+
+        <div class="repro">
+          <h3>Reproduce it</h3>
+          <p>The repository contains the notebooks for data inspection, the baseline and the LLM experiment, the saved results, and the demo app. The demo lets you browse the disagreements and the LLM's written reasons, and score a customer you describe with the baseline.</p>
+          <div class="repro__actions">
+            <div class="repro__action">
+              <a class="btn btn--primary" href="https://github.com/Denver-A7/churn-llm-comparison">GitHub repository</a>
+            </div>
+            <div class="repro__action">
+              <a class="btn btn--primary" href="https://churn-llm-vs-model.streamlit.app/" aria-describedby="demo-note">Interactive demo</a>
+              <p id="demo-note" class="repro__note">The demo may take about a minute to wake up.</p>
+            </div>
+          </div>
+        </div>
 
         <footer class="post-foot">
           <p><a href="../index.html"><span aria-hidden="true">&larr;</span> Back to all posts</a></p>

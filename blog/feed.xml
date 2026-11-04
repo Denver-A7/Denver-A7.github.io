@@ -16,7 +16,7 @@
       <category>Churn</category>
       <category>LLM</category>
       <category>Evaluation</category>
-      <description>A small test on 194 telecom customers, and what I learned from checking the AI's reasons.</description>
+      <description>A zero-shot LLM and a trained logistic regression scored about the same on 194 telecom customers. The more informative result was where they disagreed, and whether the LLM's reasons held up.</description>
     </item>
   </channel>
 </rss>
