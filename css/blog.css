@@ -682,7 +682,17 @@ article.post .spec__row dd {
 
 /* Row labels are long, so let them wrap inside the table scroller */
 article.post tbody th {
-  min-width: 11em;
+  min-width: 9em;
+  white-space: normal;
+}
+
+/* Seven columns must fit the 680px column without a sideways scroll */
+article.post .table-scroll th,
+article.post .table-scroll td {
+  padding-inline: var(--space-2);
+}
+
+article.post .table-scroll thead th {
   white-space: normal;
 }
 
@@ -816,7 +826,7 @@ article.post .shows li::before {
 /* Check mark drawn with borders so it does not depend on font glyph coverage */
 article.post .shows__col--yes li::before {
   left: .3em;
-  top: .25em;
+  top: .35em;
   width: .35em;
   height: .7em;
   border: solid var(--olive-text);
