@@ -105,10 +105,16 @@
         <p>Status: a working prototype, still being tested.</p>
 
         <p class="sec-num" aria-hidden="true">02</p>
+        <h2>Why I built it</h2>
+        <p>In summer 2026 I volunteered at the control desk of a national table tennis tournament. It was my first time in a very busy, stressful place, and I enjoyed solving problems and helping things run smoothly.</p>
+        <p>I saw that players are often entered in more than one event, that conflicts were handled on paper forms, and that a conflict reported late could delay the matches after it.</p>
+        <p>I built this prototype to practice making a full web app (forms, a database and a dashboard) around that problem. It is a personal project, for fun and for possible use at future tournaments, and all its data is made up.</p>
+
+        <p class="sec-num" aria-hidden="true">03</p>
         <h2>My role</h2>
         <p>I planned the features and tested everything myself. Claude helped me plan and wrote the rule logic and the tests. GitHub Copilot wrote much of the page code from step-by-step prompts that I ran and checked.</p>
 
-        <p class="sec-num" aria-hidden="true">03</p>
+        <p class="sec-num" aria-hidden="true">04</p>
         <h2>What I built</h2>
         <ul>
           <li>A home page with live counts.</li>
@@ -124,11 +130,11 @@
           <li>14 automated checks cover the sequence rules. All of them pass.</li>
         </ul>
 
-        <p class="sec-num" aria-hidden="true">04</p>
+        <p class="sec-num" aria-hidden="true">05</p>
         <h2>Tech</h2>
         <p>Python, Flask and SQLite. Plain HTML templates, with Bootstrap 5 and Chart.js kept on my computer so the app works offline. The fonts are Barlow Condensed and Inter.</p>
 
-        <p class="sec-num" aria-hidden="true">05</p>
+        <p class="sec-num" aria-hidden="true">06</p>
         <h2>Assumptions to be confirmed</h2>
         <p>Two rules in the app are my assumptions. I still need to confirm them with tournament staff.</p>
         <ul>
@@ -136,14 +142,6 @@
           <li>The 15-minute wait before a player is treated as a no-show.</li>
         </ul>
         <p>The app stores both as settings marked "unconfirmed" instead of treating them as facts.</p>
-
-        <p class="sec-num" aria-hidden="true">06</p>
-        <h2>What I learned</h2>
-        <ul>
-          <li>I wrote the sequence rules as small functions and tested them first. 14 automated checks cover them.</li>
-          <li>When I did not know a rule, I stored it as an "unconfirmed" setting instead of guessing.</li>
-          <li>I built in small steps and checked a screenshot after each one.</li>
-        </ul>
 
         <p class="sec-num" aria-hidden="true">07</p>
         <h2>What is next</h2>
