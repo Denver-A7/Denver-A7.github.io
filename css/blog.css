@@ -296,6 +296,17 @@ article.post .callout.limits {
   border-left: 3px solid var(--muted);
 }
 
+/* Olive edge: a note to read before the rest, not a caution */
+article.post .callout.note {
+  border-left: 3px solid var(--olive);
+}
+
+article.post .callout__title {
+  margin-bottom: var(--space-2);
+  font-weight: 600;
+  color: var(--ink);
+}
+
 article.post .callout > :last-child {
   margin-bottom: 0;
 }
@@ -440,6 +451,16 @@ article.post .chips {
 
 article.post .chips li {
   margin: 0;
+}
+
+/* Project pages: one-line status under the tags */
+article.post .post-head__status {
+  margin: var(--space-4) 0 0;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--muted);
 }
 
 article.post .takeaways {

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Conflict Resolution: a tournament desk prototype | D. Asuncion</title>
+  <meta name="description" content="A prototype web app that helps a table tennis tournament desk handle players whose events overlap in time.">
+  <link rel="canonical" href="https://denver-a7.github.io/projects/conflict-resolution/">
+  <!-- The nav bar is steel (#151515) in both themes, so one value fits both -->
+  <meta name="theme-color" content="#151515">
+  <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="D. Asuncion">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://denver-a7.github.io/projects/conflict-resolution/">
+  <meta property="og:title" content="Conflict Resolution: a tournament desk prototype">
+  <meta property="og:description" content="A prototype web app that helps a table tennis tournament desk handle players whose events overlap in time.">
+  <meta property="og:image" content="https://denver-a7.github.io/assets/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="A black steel panel on a concrete wall reading: Small, honest experiments with data.">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Conflict Resolution: a tournament desk prototype">
+  <meta name="twitter:description" content="A prototype web app that helps a table tennis tournament desk handle players whose events overlap in time.">
+  <meta name="twitter:image" content="https://denver-a7.github.io/assets/og-image.png">
+  <meta name="twitter:image:alt" content="A black steel panel on a concrete wall reading: Small, honest experiments with data.">
+
+  <!-- Runs before first paint so saved theme and JS-only reveal styles apply without a flash -->
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      var savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light" || savedTheme === "dark") document.documentElement.setAttribute("data-theme", savedTheme);
+    } catch (e) {}
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,300;0,400;1,300&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../../css/tokens.css">
+  <link rel="stylesheet" href="../../css/base.css">
+  <link rel="stylesheet" href="../../css/components.css">
+  <link rel="stylesheet" href="../../css/motion.css">
+  <link rel="stylesheet" href="../../css/blog.css">
+
+  <script src="../../js/cursor.js" defer></script>
+  <script src="../../js/blog.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header id="site-header" class="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a class="nav__brand" href="../../index.html">D. Asuncion</a>
+
+      <button class="nav__menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">
+        <span class="nav__menu-icon" aria-hidden="true"></span>
+        Menu
+      </button>
+
+      <ul id="nav-links" class="nav__links">
+        <li><a class="nav__link is-active" href="../../index.html#work" aria-current="true">Work</a></li>
+        <li><a class="nav__link" href="../../blog/index.html">Writing</a></li>
+        <li><a class="nav__link" href="../../index.html#about">About</a></li>
+        <li><a class="nav__link" href="../../index.html#contact">Contact</a></li>
+      </ul>
+
+      <button class="theme-toggle" type="button" role="switch" aria-checked="false" aria-label="Light mode">
+        <span class="theme-toggle__track" aria-hidden="true">
+          <span class="theme-toggle__rocker"></span>
+        </span>
+      </button>
+    </nav>
+  </header>
+
+  <main id="main" class="blog-main" tabindex="-1">
+    <div class="container container--article">
+      <article class="post">
+        <header class="post-head">
+          <p class="mono-label">Project</p>
+          <h1>Conflict Resolution</h1>
+          <p class="post-head__dek">A prototype web app that helps a table tennis tournament desk handle players whose events overlap in time.</p>
+          <div class="post-head__meta">
+            <ul class="chips" aria-label="Tech">
+              <li class="chip">Python</li>
+              <li class="chip">Flask</li>
+              <li class="chip">SQLite</li>
+            </ul>
+          </div>
+          <p class="post-head__status">Working prototype &middot; Made-up data &middot; Runs on my laptop only</p>
+        </header>
+
+        <div class="callout note" role="note" aria-labelledby="note-label">
+          <p id="note-label" class="callout__title">Please read first</p>
+          <p>All data in this project is made up. There are no real players and no real tournament data. Two rules are assumptions to be confirmed with tournament staff. The app runs only on my laptop. There is no live link and no login yet.</p>
+        </div>
+
+        <p class="sec-num" aria-hidden="true">01</p>
+        <h2>Overview</h2>
+        <p>At a big table tennis tournament, one player can be entered in several events that overlap in time. This app helps the tournament desk handle that. It records a conflict, suggests a play order for the player's events (for example start first, delay the next, finish last), tracks whether a player may be a no-show, and shows what is playing right now.</p>
+        <p>The app only suggests. The desk staff always decide.</p>
+        <p>Status: a working prototype, still being tested.</p>
+
+        <p class="sec-num" aria-hidden="true">02</p>
+        <h2>My role</h2>
+        <p>I planned the features and tested everything myself. Claude helped me plan and wrote the rule logic and the tests. GitHub Copilot wrote much of the page code from step-by-step prompts that I ran and checked.</p>
+
+        <p class="sec-num" aria-hidden="true">03</p>
+        <h2>What I built</h2>
+        <ul>
+          <li>A home page with live counts.</li>
+          <li>A live page that shows the events playing now, with the table, minutes played, players and conflicts. Click an event for details.</li>
+          <li>A desk list of conflicts with filters, and a page for each conflict.</li>
+          <li>A form to file a conflict, with a check for conflicts filed late.</li>
+          <li>A suggested play order for a player's events. The desk can edit it or reset it, and print a slip.</li>
+          <li>A player lookup with a heads-up banner.</li>
+          <li>Events and Players pages. Players can be added, edited, or imported from a CSV file with a preview.</li>
+          <li>Reports with charts and a CSV export.</li>
+          <li>A no-show countdown, and draft messages to a player or coach. The messages come from templates, not from AI.</li>
+          <li>A settings page, a demo clock, and dark and light themes.</li>
+          <li>14 automated checks cover the sequence rules. All of them pass.</li>
+        </ul>
+
+        <p class="sec-num" aria-hidden="true">04</p>
+        <h2>Tech</h2>
+        <p>Python, Flask and SQLite. Plain HTML templates, with Bootstrap 5 and Chart.js kept on my computer so the app works offline. The fonts are Barlow Condensed and Inter.</p>
+
+        <p class="sec-num" aria-hidden="true">05</p>
+        <h2>Assumptions to be confirmed</h2>
+        <p>Two rules in the app are my assumptions. I still need to confirm them with tournament staff.</p>
+        <ul>
+          <li>The priority order of event types.</li>
+          <li>The 15-minute wait before a player is treated as a no-show.</li>
+        </ul>
+        <p>The app stores both as settings marked "unconfirmed" instead of treating them as facts.</p>
+
+        <p class="sec-num" aria-hidden="true">06</p>
+        <h2>What I learned</h2>
+        <ul>
+          <li>I wrote the sequence rules as small functions and tested them first. 14 automated checks cover them.</li>
+          <li>When I did not know a rule, I stored it as an "unconfirmed" setting instead of guessing.</li>
+          <li>I built in small steps and checked a screenshot after each one.</li>
+        </ul>
+
+        <p class="sec-num" aria-hidden="true">07</p>
+        <h2>What is next</h2>
+        <ul>
+          <li>Confirm the two assumed rules with tournament staff.</li>
+          <li>Show the prototype to staff and ask how conflicts are really handled.</li>
+          <li>Keep testing, including on tablets and phones.</li>
+        </ul>
+
+        <footer class="post-foot">
+          <p><a href="../../index.html#work"><span aria-hidden="true">&larr;</span> Back to projects</a></p>
+
+          <section class="post-author" aria-labelledby="author-label">
+            <h2 id="author-label" class="mono-label">About the author</h2>
+            <p>Denver Asuncion studies Information Science and Data Analytics at San José State University. Drawn to predictive modeling and large language models, with a next focus on data science and AI/ML.</p>
+            <p><a href="https://github.com/Denver-A7" target="_blank" rel="noopener">More of my work on GitHub<span class="visually-hidden"> (opens in a new tab)</span></a></p>
+          </section>
+        </footer>
+      </article>
+    </div>
+  </main>
+
+  <footer id="site-footer" class="site-footer">
+    <div class="container">
+      <p class="site-footer__text">Built with HTML, CSS and a little JavaScript. &copy; 2026 Denver Asuncion.</p>
+    </div>
+  </footer>
+</body>
+</html>
